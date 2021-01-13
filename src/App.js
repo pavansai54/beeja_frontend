@@ -1,24 +1,23 @@
 import React from 'react';
-import {Route,BrowserRouter as Router,Switch} from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import history from './history';
-import {LoginPage} from "./component/LoginPage";
-import {HomePage} from "./component/HomePage";
-import {ListOfEmployee} from "./component/ListOfEmployee";
-import {CreateEmployee} from "./component/CreateEmployee";
-import {EditEmployee} from "./component/EditEmployee";
+import { LoginPage } from "./component/LoginPage";
+import { HomePage } from "./component/HomePage";
+import { ListOfEmployee } from "./component/ListOfEmployee";
+import { CreateEmployee } from "./component/CreateEmployee";
+import { EditEmployee } from "./component/EditEmployee";
 import './App.css';
 function App() {
-  
   return (
-   
+
     <Router history={history}>
-    <Switch>
-    <Route exact path="/" component={LoginPage}/>
-    <Route exact path="/home" component={HomePage}/>
-    <Route exact path="/list" component={ListOfEmployee}/>
-    <Route exact path="/adding" component={CreateEmployee}/>
-    <Route exact path="/edit" component={EditEmployee}/>
-    </Switch>
+      <Switch>
+        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/home" component={HomePage} />
+        <Route exact path="/list" component={ListOfEmployee} />
+        <Route exact path="/adding" component={CreateEmployee} />
+        <Route exact path="/edit/:id/" component={EditEmployee} />
+      </Switch>
     </Router>
   );
 }
@@ -152,8 +151,8 @@ export default App;
 //               }
 //           `;
 // export  const CreateEmployee =()=> {
-    
-   
+
+
 //     const [empState, setEmpState] = useState({
 
 //         name: '',
@@ -173,8 +172,8 @@ export default App;
 //     }
 
 //     // const [{loading, error, data }] = useMutation(EmployeeList);
-    
-   
+
+
 //     // if (loading) return "Loading...";
 //     // if (error) return "Error";
 //     // if (data) return console.log("Data from mutation", data);
@@ -188,9 +187,9 @@ export default App;
 //                 </Navbar>
 //                 <Break />
 //                 <Container >
-            
+
 //                 <Table >
-                    
+
 //                         <TableRow>
 //                             <TableColumn ><Lable htmlFor="Name"> Name: </Lable></TableColumn>
 //                             <TableColumn ><Input type="text" value={empState.name} onChange={(e)=>setEmpState({setEmpState,name:e.target.value})}  /></TableColumn>

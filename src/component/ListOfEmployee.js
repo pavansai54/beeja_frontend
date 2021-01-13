@@ -1,11 +1,10 @@
-import React, { Component, Fragment,useState } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import Styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 //  import history from './../History';
-import { useQuery, gql,useMutation } from '@apollo/client';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit,faTrash} from '@fortawesome/free-solid-svg-icons'
-
+import { useQuery, gql, useMutation } from '@apollo/client';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
@@ -82,7 +81,10 @@ const LinkTag = Styled(Link)`
 color:black;
 text-decoration:none;
 `;
-const Show = gql`
+
+export const ListOfEmployee = () => {
+    
+    const Show = gql`
 {
     employeeList{
     id
@@ -96,44 +98,41 @@ const Show = gql`
     }
   }`;
 
-  
-
-  
-export const ListOfEmployee = () => {
-
-    const [empId,setEmpId]= useState("");
+    const [empId, setEmpId] = useState({ 'idToDelete': "" });
 
     const DELETE_Employee = gql`
-    mutation{
-    deleteEmployee(id: "${empId}"){
+    mutation DeleteEmployee($id: String!){
+    deleteEmployee(id: $id){
     respCode,
-    respMessage
+    respMessage 
   }
 }
 `;
-    
-    const { loading, error, data } = useQuery(Show);
+    const {loading, error, data } = useQuery(Show);
 
     const [deleteMutation] = useMutation(DELETE_Employee);
 
-    
-    const handleDelete =(id)=>{
-        setEmpId(id);
-        console.log(empId);
-        deleteMutation();
-    
+    const handleDelete = (deleteId) => {
+        setEmpId({ 'idToDelete': deleteId });
+        console.log("handleDelte", deleteId, empId);
+        deleteMutation({ variables: { id: deleteId } });
     };
+
+
 
     if (loading) return <p>Loading ...</p>;
     if (error) return <p>Error</p>;
 
+   
+       
 
     return (
-       
+
         <Fragment>
             {/* <Navbar bgColor="powderblue" color="black">
-                    <Logo src={require("../images/Logo.png")} /> Beeja
-                </Navbar> */}
+                    <Logo src={require("../images/Logo.png")} /> 
+                    Beeja
+                </Navbar>  */}
             <Navbar bgColor="grey" color="white">
                 List of Employee
                     <Button >
@@ -155,7 +154,7 @@ export const ListOfEmployee = () => {
                         <TableHeading>Edit</TableHeading>
                         <TableHeading>Delete</TableHeading>
                     </TableRow>
-                    
+
 
                     {data.employeeList.map((employee, id) => (
                         <TableRow>
@@ -169,19 +168,15 @@ export const ListOfEmployee = () => {
                             <TableData>{employee.mobileNo}</TableData>
 
                             <TableData style={{ "text-align": "center" }} >
-                            <LinkTag to={"/edit"}>
-                                <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
+                                <LinkTag to={`/edit/${employee.id}`}>
+                                    <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
-                            
-                            
                             <TableData style={{ "text-align": "center" }} >
-                                {/* <Button onClick={DeleteEmployee}>-</Button> */}
-                                    <Button onClick={()=>handleDelete(employee.id)} >
-                                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon> 
-                                    </Button>
-                             </TableData>
-                    
+                                <Button onClick={() => handleDelete(employee.id)} >
+                                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                                </Button>
+                            </TableData>
                         </TableRow>
                     )
                     )}
