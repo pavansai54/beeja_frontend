@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import {React,Fragment} from "react";
 import Styled from '@emotion/styled';
-// import ListsofEmployees from "./ListOfEmployee";
 import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,16 +55,7 @@ border-radius:5px;
 &:hover {
 opacity:0.5;
 `;
-
-
- 
-    // window.onpopstate= function()
-    // {
-    //     alert("Are you sure want to leave this page");
-    // }
-    
-export const HomePage = () => {
-
+export const HR=()=>{
     return (
         
         <Fragment>
@@ -73,25 +63,18 @@ export const HomePage = () => {
                     <Logo src={require("./images/mobile_black.png") } /> Beeja
                 </Navbar> */}
             <Navbar bgColor="grey" color="white" text="center">
-                Home page
+                HR
                     </Navbar>
             <Table>
                 <TableRow>
+                    <TableRow><TableData>LEAVE MANAGEMENT</TableData></TableRow>
+                    <TableRow><TableData> LEAVE POLICY</TableData></TableRow>
                     <TableRow><TableData>
-                    <LinkTag to={"/hr"} >HR </LinkTag></TableData></TableRow>
-                    <TableRow><TableData> ACCOUNTING</TableData></TableRow>
-                    <TableRow><TableData>
-                        <LinkTag to={"/list"} >
-                            EMOPLOYEE DIRECTORY
-                             </LinkTag>
-                    </TableData></TableRow>
-                    <TableRow><TableData> CLIENT</TableData></TableRow>
-                    
-                    <TableRow ><TableData>
-                
-                        DOCUMENTATION
-                        </TableData></TableRow>
-                             
+                        <LinkTag to={"/personal"}>
+                        PERSONAL DETAILS
+                        </LinkTag></TableData></TableRow>
+                    <TableRow><TableData>OFFER LETTER INCREMENT</TableData></TableRow>
+                    <TableRow ><TableData>DOCUMENTS</TableData></TableRow>      
                 </TableRow>
             </Table>
         </Fragment>

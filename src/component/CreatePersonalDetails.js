@@ -1,12 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import Styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { useMutation, gql } from '@apollo/client';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-// import {gql} from 'graphql-tag'
-
+import { useMutation, gql, useQuery } from '@apollo/client';
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
 position: sticky;
@@ -69,44 +64,37 @@ const LinkTag = Styled(Link)`
 color:black; 
 text-decoration:none;
 `;
-
-export const CreateEmployee = () => {
+export const Create_PersonalDetails=()=>{
 
     const [formData, createFormData] = useState({
-        username:"",
+        name:"",
         code: "",
         email: " ",
-        mobileNO: "",
-        department: "",
-        role: "",
-        joinDate: ""
+       role: "",
+        pan: "",
+       account: "",
+        ifsc: ""
     });
 
-    const EmployeeList = gql`
+    const Personal = gql`
      mutation {
-         createEmployee(data: {
-              name:"${formData.username}",
+        createPersonalDetails(data:{
+              name:"${formData.name}",
               code:"${formData.code}",
               email:"${formData.email}",
-              mobileNo:"${formData.mobileNO}",
-              department:"${formData.department}",
               role:"${formData.role}",
-             joinedDate:"${formData.joinDate}"   
+              pan_No:"${formData.pan}",
+              account_No:"${formData.account}",
+              ifsc_code:"${formData.ifsc}"   
            })
                   {
                       respCode, respMessage
                   }
               }
           `;
-    const [EmployeeCreate, { loading, error, data }] = useMutation(EmployeeList);
+    const [PDCreate, { loading, error, data }] = useMutation(Personal);
     if (loading) return <p>Loading ...</p>;
     if (error) return <p>Error</p>;
-
-    // toast.configure() 
-    // const remind = (message)=>{  
-    //     toast.success(message,
-    //     {position: toast.POSITION.BOTTOM_RIGHT})  
-    //   };
 
     const handleChange = (e) => {
         createFormData({
@@ -116,63 +104,36 @@ export const CreateEmployee = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault()
-         EmployeeCreate();
-        showToast();
+      PDCreate();
     };
-
-    toast.configure()
-    const showToast = () => {
-    if (error)  { 
-        toast.info('successful');
-    }
-};
-
-    return (
-
+   console.log(formData.name);
+    return(
         <Fragment>
-            {/* <Navbar bgColor="powderblue" color="black">
-                        <Logo src={require("../images/Logo.png")}></Logo> Beeja
-                        </Navbar> */}
             <Navbar bgColor="grey" color="white">
-                Create an Employee
+                Add Personal Details
                         </Navbar>
             <Break />
             <Container >
                 <Table >
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Name"> Name: </Lable></TableColumn>
-                        <TableColumn ><Input type="text" name="username" onChange={handleChange} required /></TableColumn>
+                        <TableColumn ><Input type="text" name="user" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="Empl-Id"> Employee Id: </Lable></TableColumn>
-                        <TableColumn><Input type="text" name="code" onChange={handleChange} required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="Empl-Id"> Employee Code: </Lable></TableColumn>
+                        <TableColumn><Input type="text"  onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Email"> Email: </Lable></TableColumn>
-                        <TableColumn><Input type="email" name="email" onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input type="email"   onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
-                    <TableRow>
-                        <TableColumn > <Lable htmlFor="Mobile Number"> Mobile Number: </Lable></TableColumn>
-                        <TableColumn><Input placeholder=" +91 " name="mobileNO" onChange={handleChange} type="number" required /></TableColumn>
-                    </TableRow>
-                    <Break />
-                    <TableRow>
-                        <TableColumn > <Lable htmlFor="Department"> Department: </Lable></TableColumn>
-                        <TableColumn><SelectBox className="Selectbox1" name="department" onChange={handleChange} required>
-                            <Option disabled selected value> Select an Option</Option>
-                            <Option value="HR"> HR </Option>
-                            <Option value="ADMIN"> ADMIN </Option>
-                            <Option value="ACCOUNTING"> ACCOUNTING </Option>
-                            <Option value="IT"> IT </Option>
-                        </SelectBox></TableColumn>
-                    </TableRow>
-                    <Break />
+                   
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Role"> Role: </Lable></TableColumn>
-                        <TableColumn><SelectBox className="Selectbox1" name="role" onChange={handleChange} required>
+                        <TableColumn><SelectBox className="Selectbox1" name="role"  onChange={handleChange} required>
                             <Option disabled selected value> Select an Option</Option>
                             <Option value="ADMIN"> ADMIN </Option>
                             <Option value="SUPER ADMIN"> SUPER ADMIN </Option>
@@ -183,20 +144,30 @@ export const CreateEmployee = () => {
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="Date-Containerat" className="Selectbox1"> Join Date: </Lable></TableColumn>
-                        <TableColumn><Input type="date" placeholder="dd-mm-yyyy" name="joinDate" onChange={handleChange} required /></TableColumn>
+                        <TableColumn > <Lable htmlFor="PAN"> PAN: </Lable></TableColumn>
+                        <TableColumn><Input   onChange={handleChange} required /></TableColumn>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableColumn ><Lable htmlFor="Account Number" >Account Number: </Lable></TableColumn>
+                        <TableColumn><Input  onChange={handleChange} required /></TableColumn>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableColumn ><Lable htmlFor="IFSC Code">IFSC Code: </Lable></TableColumn>
+                        <TableColumn><Input  onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn >
                             <Button type="Cancel">
-                                <LinkTag to={"/list"}>Cancel</LinkTag>
+                                <LinkTag to={"/personal"}>Cancel</LinkTag>
                             </Button>
                         </TableColumn>
 
                         <TableColumn>
                             <Button onClick={handleSubmit}>
-                                <LinkTag to={"/list"}>Submit</LinkTag>
+                                <LinkTag to={"/personal"}>Submit</LinkTag>
                             </Button>
                         </TableColumn>
                     </TableRow>
@@ -205,5 +176,5 @@ export const CreateEmployee = () => {
             </Container>
 
         </Fragment>
-    );
+    )
 }

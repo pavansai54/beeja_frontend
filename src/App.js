@@ -6,7 +6,14 @@ import { HomePage } from "./component/HomePage";
 import { ListOfEmployee } from "./component/ListOfEmployee";
 import { CreateEmployee } from "./component/CreateEmployee";
 import { EditEmployee } from "./component/EditEmployee";
+import {EmployeeDetails} from "./component/EmployeeDetails";
+import {EmpDetails} from "./component/SearchEmpDetails";
+import {HR} from "./component/HR_Page";
+import {PersonalDetails} from './component/ListofPersonalDetails';
+import {Create_PersonalDetails} from "./component/CreatePersonalDetails";
+import {Personal_Details} from "./component/PersonalDetails"
 import './App.css';
+import { from } from 'apollo-boost';
 function App() {
   return (
 
@@ -17,6 +24,12 @@ function App() {
         <Route exact path="/list" component={ListOfEmployee} />
         <Route exact path="/adding" component={CreateEmployee} />
         <Route exact path="/edit/:id/" component={EditEmployee} />
+        <Route exact path="/display/:id/" component={EmployeeDetails}/>
+        <Route exact path="/search/:code/" component={EmpDetails}/>
+        <Route exact path="/hr" component={HR}/>
+        <Route exact path="/personal" component={PersonalDetails}/>
+        <Route exact path="/createpresonal" component={Create_PersonalDetails}/>
+        <Route exact path="/pd/:id/" component={Personal_Details}/>
       </Switch>
     </Router>
   );
