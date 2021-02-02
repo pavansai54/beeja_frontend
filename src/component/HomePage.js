@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Styled from '@emotion/styled';
-// import ListsofEmployees from "./ListOfEmployee";
 import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './images/mobile_black.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -66,9 +63,6 @@ export const HomePage = () => {
     return (
         
         <Fragment>
-            {/* <Navbar bgColor="powderblue" color="black">
-                    <Logo src={require("./images/mobile_black.png") } /> Beeja
-                </Navbar> */}
             <Navbar bgColor="grey" color="white" text="center">
                 Home page
                     </Navbar>

@@ -1,4 +1,4 @@
-import {React,Fragment} from "react";
+import { React, Fragment } from "react";
 import Styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
@@ -55,13 +55,10 @@ border-radius:5px;
 &:hover {
 opacity:0.5;
 `;
-export const HR=()=>{
+export const HR = () => {
     return (
-        
+
         <Fragment>
-            {/* <Navbar bgColor="powderblue" color="black">
-                    <Logo src={require("./images/mobile_black.png") } /> Beeja
-                </Navbar> */}
             <Navbar bgColor="grey" color="white" text="center">
                 HR
                     </Navbar>
@@ -71,10 +68,10 @@ export const HR=()=>{
                     <TableRow><TableData> LEAVE POLICY</TableData></TableRow>
                     <TableRow><TableData>
                         <LinkTag to={"/personal"}>
-                        PERSONAL DETAILS
+                            PERSONAL DETAILS
                         </LinkTag></TableData></TableRow>
                     <TableRow><TableData>OFFER LETTER INCREMENT</TableData></TableRow>
-                    <TableRow ><TableData>DOCUMENTS</TableData></TableRow>      
+                    <TableRow ><TableData>DOCUMENTS</TableData></TableRow>
                 </TableRow>
             </Table>
         </Fragment>

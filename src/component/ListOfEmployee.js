@@ -1,11 +1,10 @@
 import React, { Component, Fragment, useState, } from 'react';
 import Styled from '@emotion/styled';
-import { Link ,useParams,useHistory} from 'react-router-dom';
-//  import history from './../History';
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit,faTrash,faSearch} from '@fortawesome/free-solid-svg-icons'
-// import { from } from 'apollo-boost';
+import { faEdit, faTrash, faSearch } from '@fortawesome/free-solid-svg-icons'
+
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
 position: sticky;
@@ -75,18 +74,11 @@ const IdButton = Styled.button`
 border:none;
 outline:none;
     `;
-
-
-// const TriangleButton = Styled(Actionbutton)`
-// border-left: 7px solid transparent;
-// border-right:7px solid transparent;
-// border-top: 6px dashed;
-// `;
 const LinkTag = Styled(Link)`
 color:black;
 text-decoration:none;
 `;
-const Hover =Styled.a`
+const Hover = Styled.a`
 &:hover {
     color:blue;
 `;
@@ -102,7 +94,6 @@ font-size:15px;
 export const ListOfEmployee = () => {
 
     const { id } = useParams();
-    const{code} =useParams();
 
     const Show = gql`
 {
@@ -118,25 +109,8 @@ export const ListOfEmployee = () => {
     }
   }`;
 
-
-//   const [emp,setemp] = useState({ 'idTodisplay': "" });
-//   const SearchTerm =(e)=>{
-//       this.setemp({idTodisplay:e.target.value})
-//   }
-//   const dynamicSearch=()=>{
-//       return this.state.code.filter(code=>code.toLowerCase().includes(this.state.idTodisplay.toLowerCase()))
-//   }
-
-//   const Display =()=>{
-//       SearchTerm();
-//       dynamicSearch();
-//   }
-
-//   const history = useHistory();
-//    const navigateTo = () => history.push(`/read/${data.employee.code}`);
-
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
-    
+
     const DELETE_Employee = gql`
     mutation DeleteEmployee($id: String!){
     deleteEmployee(id: $id){
@@ -146,8 +120,8 @@ export const ListOfEmployee = () => {
 }
 `;
 
-const {loading, error, data} = useQuery(Show);
-const [deleteMutation] = useMutation(DELETE_Employee);
+    const { loading, error, data } = useQuery(Show);
+    const [deleteMutation] = useMutation(DELETE_Employee);
 
     const handleDelete = (deleteId) => {
         if (window.confirm("Do you really want to leave?")) {
@@ -160,17 +134,17 @@ const [deleteMutation] = useMutation(DELETE_Employee);
 
         }
     };
-    
+
     if (loading) return <p>Loading ...</p>;
     if (error) return <p>Error</p>;
-  
+
     return (
 
         <Fragment>
             <Navbar bgColor="grey" color="white">
                 List of Employee
                 <Input type="text" placeholder="Search" ></Input>
-                    <Button >
+                <Button >
                     <LinkTag to={"/adding"}>Add Employee</LinkTag>
                 </Button>
             </Navbar>
@@ -192,12 +166,12 @@ const [deleteMutation] = useMutation(DELETE_Employee);
                     {data.employeeList.map((employee, id) => (
                         <TableRow>
                             <a href="">
-                        <LinkTag to={`/display/${employee.id}`}>
-                               <Hover> 
-                                   <TableData key={id}>{employee.code}</TableData>
-                               </Hover>
+                                <LinkTag to={`/display/${employee.id}`}>
+                                    <Hover>
+                                        <TableData key={id}>{employee.code}</TableData>
+                                    </Hover>
                                 </LinkTag>
-                                </a>
+                            </a>
                             <TableData>{employee.name}</TableData>
                             <TableData>{employee.email}</TableData>
                             <TableData>{employee.role}</TableData>

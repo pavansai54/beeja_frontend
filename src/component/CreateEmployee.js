@@ -5,8 +5,6 @@ import { useMutation, gql } from '@apollo/client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import {gql} from 'graphql-tag'
-
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
 position: sticky;

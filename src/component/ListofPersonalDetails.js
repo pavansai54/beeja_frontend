@@ -1,9 +1,9 @@
-import {React,Fragment,useState} from "react";
+import { React, Fragment, useState } from "react";
 import Styled from '@emotion/styled';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
- import { faPlus,faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
- import { useQuery, gql, useMutation } from '@apollo/client';
+import { faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useQuery, gql, useMutation } from '@apollo/client';
 
 
 const Navbar = Styled.nav`
@@ -68,14 +68,14 @@ const LinkTag = Styled(Link)`
 color:black;
 text-decoration:none;
 `;
-const Hover =Styled.a`
+const Hover = Styled.a`
 &:hover {
     color:blue;
 `;
- export const PersonalDetails=()=>{
-    const {id}= useParams();
+export const PersonalDetails = () => {
+    const { id } = useParams();
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
-const Show =gql`
+    const Show = gql`
 { 
     personalList{
         id
@@ -88,7 +88,7 @@ const Show =gql`
         ifsc_code
     }
  }`;
- const DELETE_PD= gql`
+    const DELETE_PD = gql`
  mutation DeletePD($id: String!){
     deletePersonalDetails(id: $id){
  respCode,
@@ -97,32 +97,32 @@ const Show =gql`
 }
 `;
 
-const {loading, error, data} = useQuery(Show);
-const [deleteMutation] = useMutation(DELETE_PD);
-const handleDelete = (deleteId) => {
-    if (window.confirm("Do you really want to leave?")) {
-        setEmpId({ 'idToDelete': deleteId });
-        console.log("handleDelte", deleteId, empId);
-        deleteMutation({ variables: { id: deleteId } });
+    const { loading, error, data } = useQuery(Show);
+    const [deleteMutation] = useMutation(DELETE_PD);
+    const handleDelete = (deleteId) => {
+        if (window.confirm("Do you really want to leave?")) {
+            setEmpId({ 'idToDelete': deleteId });
+            console.log("handleDelte", deleteId, empId);
+            deleteMutation({ variables: { id: deleteId } });
 
-    }
-    else {
+        }
+        else {
 
-    }
-};
+        }
+    };
 
 
-console.log(data);
-if(loading) return <p>loading</p>;
-if(error) return <p>Error</p>;
-return(
-    <Fragment>
-<Navbar bgColor="grey" color="white">Personal Details
+    console.log(data);
+    if (loading) return <p>loading</p>;
+    if (error) return <p>Error</p>;
+    return (
+        <Fragment>
+            <Navbar bgColor="grey" color="white">Personal Details
 <Button >
-<LinkTag to={"/createpresonal"}>
-    <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>    ADD</LinkTag>
- </Button>
-</Navbar>
+                    <LinkTag to={"/createpresonal"}>
+                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>    ADD</LinkTag>
+                </Button>
+            </Navbar>
             <Break />
             <Container>
                 <Table>
@@ -131,48 +131,48 @@ return(
                         <TableHeading>Name</TableHeading>
                         <TableHeading>Email</TableHeading>
                         <TableHeading>Role</TableHeading>
-                    <TableHeading>PAN</TableHeading>
-                    <TableHeading>Account Number</TableHeading>
-                    <TableHeading>IFSC Code</TableHeading>
+                        <TableHeading>PAN</TableHeading>
+                        <TableHeading>Account Number</TableHeading>
+                        <TableHeading>IFSC Code</TableHeading>
                         <TableHeading>Edit</TableHeading>
                         <TableHeading>Delete</TableHeading>
-                  </TableRow>
-                  {data.personalList.map((emp, id) => (
-      <TableRow>
-          <a href="">
-                        <LinkTag to={`/pd/${emp.id}`}>
-                               <Hover> 
-                                   <TableData key={id}>{emp.code}</TableData>
-                               </Hover>
+                    </TableRow>
+                    {data.personalList.map((emp, id) => (
+                        <TableRow>
+                            <a href="">
+                                <LinkTag to={`/pd/${emp.id}`}>
+                                    <Hover>
+                                        <TableData key={id}>{emp.code}</TableData>
+                                    </Hover>
                                 </LinkTag>
-                                </a>
-          <TableData>{emp.name}</TableData>
-          <TableData>{emp.email}</TableData>
-          <TableData>{emp.role}</TableData>
-          <TableData>{emp.pan_No}</TableData>
-          <TableData>{emp.account_No}</TableData>
-          <TableData>{emp.ifsc_code}</TableData>
-          <TableData style={{ "text-align": "center" }} >
-                             <LinkTag to={`/editpd/:id/`}>
+                            </a>
+                            <TableData>{emp.name}</TableData>
+                            <TableData>{emp.email}</TableData>
+                            <TableData>{emp.role}</TableData>
+                            <TableData>{emp.pan_No}</TableData>
+                            <TableData>{emp.account_No}</TableData>
+                            <TableData>{emp.ifsc_code}</TableData>
+                            <TableData style={{ "text-align": "center" }} >
+                                <LinkTag to={`/editpd/:id/`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
-                                    </LinkTag>
+                                </LinkTag>
                             </TableData>
                             <TableData style={{ "text-align": "center" }} >
-                              
-                            <Button onClick={() => handleDelete(emp.id)} >
+
+                                <Button onClick={() => handleDelete(emp.id)} >
                                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                 </Button>
-                               
-                            </TableData>
-         
-      </TableRow>
-  ))
 
-  }
+                            </TableData>
+
+                        </TableRow>
+                    ))
+
+                    }
                 </Table>
             </Container>
 
-    </Fragment>
+        </Fragment>
 
-)
+    )
 }
