@@ -101,7 +101,7 @@ export const EditEmployee = () => {
 
     const EmployeeEdit = gql`
      mutation UpdateEmployee($id: String!){
-         updateEmployee(id: $id,data: {
+         updateEmployee(id:$id,data: {
               name:"${empState.username}",
               code:"${empState.code}",
               email:"${empState.email}",

@@ -68,7 +68,6 @@ color:black;
 text-decoration:none;
 `;
 
-
 export const Personal_Details = () => {
 
     const [personState, setState] = useState({
@@ -125,7 +124,7 @@ export const Personal_Details = () => {
                     <TableRow>
 
                         <TableColumn ><Lable htmlFor="name"> Name</Lable></TableColumn>
-                        <TableColumn >:<Input value={personState.name}/></TableColumn>
+                        <TableColumn >:<Input value={personState.name} readOnly/></TableColumn>
 
                     </TableRow>
                     <Break />

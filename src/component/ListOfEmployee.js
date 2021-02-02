@@ -1,10 +1,10 @@
 import React, { Component, Fragment, useState, } from 'react';
 import Styled from '@emotion/styled';
-import { Link ,useParams} from 'react-router-dom';
+import { Link ,useParams,useHistory} from 'react-router-dom';
 //  import history from './../History';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEdit,faTrash,faSearch} from '@fortawesome/free-solid-svg-icons'
 // import { from } from 'apollo-boost';
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
@@ -102,6 +102,7 @@ font-size:15px;
 export const ListOfEmployee = () => {
 
     const { id } = useParams();
+    const{code} =useParams();
 
     const Show = gql`
 {
@@ -116,6 +117,23 @@ export const ListOfEmployee = () => {
     mobileNo
     }
   }`;
+
+
+//   const [emp,setemp] = useState({ 'idTodisplay': "" });
+//   const SearchTerm =(e)=>{
+//       this.setemp({idTodisplay:e.target.value})
+//   }
+//   const dynamicSearch=()=>{
+//       return this.state.code.filter(code=>code.toLowerCase().includes(this.state.idTodisplay.toLowerCase()))
+//   }
+
+//   const Display =()=>{
+//       SearchTerm();
+//       dynamicSearch();
+//   }
+
+//   const history = useHistory();
+//    const navigateTo = () => history.push(`/read/${data.employee.code}`);
 
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
     
@@ -142,7 +160,6 @@ const [deleteMutation] = useMutation(DELETE_Employee);
 
         }
     };
-  
     
     if (loading) return <p>Loading ...</p>;
     if (error) return <p>Error</p>;
@@ -150,20 +167,12 @@ const [deleteMutation] = useMutation(DELETE_Employee);
     return (
 
         <Fragment>
-            {/* <Navbar bgColor="powderblue" color="black">
-                    <Logo src={require("../images/Logo.png")} /> 
-                    Beeja
-                </Navbar>  */}
-                
             <Navbar bgColor="grey" color="white">
                 List of Employee
-               
-                <Input type="text" placeholder="Search"  ></Input>
-              
+                <Input type="text" placeholder="Search" ></Input>
                     <Button >
                     <LinkTag to={"/adding"}>Add Employee</LinkTag>
                 </Button>
-               
             </Navbar>
             <Break />
             <Container>
@@ -189,7 +198,6 @@ const [deleteMutation] = useMutation(DELETE_Employee);
                                </Hover>
                                 </LinkTag>
                                 </a>
-                            
                             <TableData>{employee.name}</TableData>
                             <TableData>{employee.email}</TableData>
                             <TableData>{employee.role}</TableData>

@@ -117,17 +117,17 @@ export const Create_PersonalDetails=()=>{
                 <Table >
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Name"> Name: </Lable></TableColumn>
-                        <TableColumn ><Input type="text" name="user" onChange={handleChange} required /></TableColumn>
+                        <TableColumn ><Input type="text" name="name" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Empl-Id"> Employee Code: </Lable></TableColumn>
-                        <TableColumn><Input type="text"  onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input type="text"  name="code" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Email"> Email: </Lable></TableColumn>
-                        <TableColumn><Input type="email"   onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input type="email"  name="email" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                    
@@ -145,17 +145,17 @@ export const Create_PersonalDetails=()=>{
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="PAN"> PAN: </Lable></TableColumn>
-                        <TableColumn><Input   onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input  name="pan" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Account Number" >Account Number: </Lable></TableColumn>
-                        <TableColumn><Input  onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input name="account" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="IFSC Code">IFSC Code: </Lable></TableColumn>
-                        <TableColumn><Input  onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input  name="ifsc" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>

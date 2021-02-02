@@ -56,9 +56,6 @@ border-radius:5px;
 &:hover {
 opacity:0.5;
 `;
-
-
- 
     // window.onpopstate= function()
     // {
     //     alert("Are you sure want to leave this page");
