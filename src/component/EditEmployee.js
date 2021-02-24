@@ -3,9 +3,6 @@ import React, { Component, Fragment, useState } from 'react'
 import Styled from '@emotion/styled';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, gql, useQuery } from '@apollo/client';
-import { ListOfEmployee } from './ListOfEmployee';
-import { graphql } from 'graphql';
-
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
 position: sticky;

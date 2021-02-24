@@ -76,7 +76,7 @@ export const PersonalDetails = () => {
     const { id } = useParams();
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
     const Show = gql`
-{ 
+   query{ 
     personalList{
         id
         name
@@ -115,6 +115,7 @@ export const PersonalDetails = () => {
     console.log(data);
     if (loading) return <p>loading</p>;
     if (error) return <p>Error</p>;
+
     return (
         <Fragment>
             <Navbar bgColor="grey" color="white">Personal Details
@@ -153,7 +154,7 @@ export const PersonalDetails = () => {
                             <TableData>{emp.account_No}</TableData>
                             <TableData>{emp.ifsc_code}</TableData>
                             <TableData style={{ "text-align": "center" }} >
-                                <LinkTag to={`/editpd/:id/`}>
+                                <LinkTag to={`/editpersonal/${emp.id}`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
@@ -167,7 +168,6 @@ export const PersonalDetails = () => {
 
                         </TableRow>
                     ))
-
                     }
                 </Table>
             </Container>
@@ -176,3 +176,4 @@ export const PersonalDetails = () => {
 
     )
 }
+

@@ -69,22 +69,21 @@ text-decoration:none;
 `;
 
 export const Personal_Details = () => {
-
+    const { id } = useParams();
     const [personState, setState] = useState({
         name: "",
         code: "",
-        email:"",
+        email: "",
         role: " ",
         pan_No: "",
         account_No: "",
         ifsc_code: ""
     })
 
-    const { id } = useParams();
 
-    const DisplayPD =gql`
+    const DisplayPD = gql`
     query PDDisplay($id:String!){
-        personaldetalis(id:$id){
+        personal(id:$id){
             name
             code
             email
@@ -100,14 +99,14 @@ export const Personal_Details = () => {
 
     if (loading) return <p>Loading....</p>
     if (error) return <p>ERROR....</p>
-    if (data && data.personaldetalis) {
-        personState.name = data.personaldetalis.name;
-        personState.code = data.personaldetalis.code;
-        personState.email = data.personaldetalis.email;
-        personState.role = data.personaldetalis.role;
-        personState.pan_No = data.personaldetalis.pan_No;
-        personState.account_No = data.personaldetalis.account_No;
-        personState.ifsc_code = data.personaldetalis.ifsc_code;
+    if (data && data.personal) {
+        personState.name = data.personal.name;
+        personState.code = data.personal.code;
+        personState.email = data.personal.email;
+        personState.role = data.personal.role;
+        personState.pan_No = data.personal.pan_No;
+        personState.account_No = data.personal.account_No;
+        personState.ifsc_code = data.personal.ifsc_code;
     }
 
     return (
@@ -124,38 +123,38 @@ export const Personal_Details = () => {
                     <TableRow>
 
                         <TableColumn ><Lable htmlFor="name"> Name</Lable></TableColumn>
-                        <TableColumn >:<Input value={personState.name} readOnly/></TableColumn>
+                        <TableColumn >:<Input value={personState.name} readOnly /></TableColumn>
 
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Empl-Id"> Employee Code </Lable></TableColumn>
-                        <TableColumn>:<Input  value={personState.code}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.code} readOnly /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Email"> Email </Lable></TableColumn>
-                        <TableColumn>:<Input  value={personState.email}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.email} readOnly /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Role"> Role</Lable></TableColumn>
-                        <TableColumn>:<Input value={personState.role}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.role} readOnly /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="PAN"> PAN</Lable></TableColumn>
-                        <TableColumn>:<Input value={personState.pan_No}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.pan_No} readOnly /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Account Number"> Account Number</Lable></TableColumn>
-                        <TableColumn>:<Input value={personState.account_No}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.account_No} readOnly /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="IFSC"> IFSC</Lable></TableColumn>
-                        <TableColumn>:<Input value={personState.ifsc_code}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={personState.ifsc_code} readOnly /></TableColumn>
                     </TableRow>
                 </Table>
 

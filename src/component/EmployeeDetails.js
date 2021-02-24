@@ -70,7 +70,15 @@ text-decoration:none;
 export const EmployeeDetails = () => {
 
     const { id } = useParams();
-
+    const [empState, setState] = useState({
+        username: "",
+        code: "",
+        email: " ",
+        mobileNo: "",
+        department: "",
+        role: "",
+        joinedDate: ""
+    })
     const GetEmployeeById = gql`
     query EmpDetails($id:String!){
         employee(id:$id){
@@ -89,6 +97,15 @@ export const EmployeeDetails = () => {
 
     if (loading) return <p>Loading....</p>
     if (error) return <p>ERROR....</p>
+    if (data && data.employee) {
+    empState.name = data.employee.name;
+    empState .code = data.employee.code;
+    empState.email = data.employee.email;
+    empState.mobileNo = data.employee.mobileNo;
+    empState.department = data.employee.department;
+    empState.role = data.employee.role;
+    empState.joinedDate = data.employee.joinedDate;
+    }
 
 
 
@@ -106,40 +123,40 @@ export const EmployeeDetails = () => {
                     <TableRow>
 
                         <TableColumn ><Lable htmlFor="Name"> Name</Lable></TableColumn>
-                        <TableColumn >:<Input value={data.employee.name} readOnly/></TableColumn>
+                        <TableColumn >:<Input value={empState.name} readOnly/></TableColumn>
 
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Empl-Id"> Employee Code </Lable></TableColumn>
-                        <TableColumn>:<Input  value={data.employee.code}  readOnly/></TableColumn>
+                        <TableColumn>:<Input  value={empState.code}  readOnly/></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Email"> Email </Lable></TableColumn>
-                        <TableColumn>:<Input  value={data.employee.email}  readOnly/></TableColumn>
+                        <TableColumn>:<Input  value={empState.email}  readOnly/></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Mobile Number"> Mobile Number </Lable></TableColumn>
-                        <TableColumn>:<Input value={data.employee.mobileNo}  readOnly/></TableColumn>
+                        <TableColumn>:<Input value={empState.mobileNo}  readOnly/></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Department"> Department</Lable></TableColumn>
-                        <TableColumn>:<Input value={data.employee.department} readOnly/>
+                        <TableColumn>:<Input value={empState.department} readOnly/>
                         </TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Role"> Role</Lable></TableColumn>
-                        <TableColumn>:<Input value={data.employee.role}  readOnly/>
+                        <TableColumn>:<Input value={empState.role}  readOnly/>
                         </TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Date-Containerat" className="Selectbox1"> Join Date</Lable></TableColumn>
-                        <TableColumn>:<Input value={data.employee.joinedDate} readOnly/></TableColumn>
+                        <TableColumn>:<Input value={empState.joinedDate} readOnly/></TableColumn>
                     </TableRow>
                     <Break />
                    

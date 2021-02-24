@@ -100,12 +100,6 @@ export const CreateEmployee = () => {
     if (loading) return <p>Loading ...</p>;
     if (error) return <p>Error</p>;
 
-    // toast.configure() 
-    // const remind = (message)=>{  
-    //     toast.success(message,
-    //     {position: toast.POSITION.BOTTOM_RIGHT})  
-    //   };
-
     const handleChange = (e) => {
         createFormData({
             ...formData,
@@ -128,9 +122,6 @@ export const CreateEmployee = () => {
     return (
 
         <Fragment>
-            {/* <Navbar bgColor="powderblue" color="black">
-                        <Logo src={require("../images/Logo.png")}></Logo> Beeja
-                        </Navbar> */}
             <Navbar bgColor="grey" color="white">
                 Create an Employee
                         </Navbar>

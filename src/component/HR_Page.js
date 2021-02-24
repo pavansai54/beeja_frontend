@@ -2,8 +2,6 @@ import { React, Fragment } from "react";
 import Styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './images/mobile_black.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -55,6 +53,12 @@ border-radius:5px;
 &:hover {
 opacity:0.5;
 `;
+const Hover = Styled.a`
+a:link{
+    color: black; 
+    text-decoration: none;
+  }
+`;
 export const HR = () => {
     return (
 
@@ -65,7 +69,9 @@ export const HR = () => {
             <Table>
                 <TableRow>
                     <TableRow><TableData>LEAVE MANAGEMENT</TableData></TableRow>
-                    <TableRow><TableData> LEAVE POLICY</TableData></TableRow>
+                    <TableRow><TableData>
+                        <Hover href="https://drive.google.com/file/d/1O5XlrbfEO6ZlTeAw762bbXQYoI5Ck0aA/view?usp=sharing">LEAVE POLICY</Hover>
+                    </TableData></TableRow>
                     <TableRow><TableData>
                         <LinkTag to={"/personal"}>
                             PERSONAL DETAILS

@@ -53,15 +53,10 @@ border-radius:5px;
 &:hover {
 opacity:0.5;
 `;
-    // window.onpopstate= function()
-    // {
-    //     alert("Are you sure want to leave this page");
-    // }
-    
 export const HomePage = () => {
 
     return (
-        
+
         <Fragment>
             <Navbar bgColor="grey" color="white" text="center">
                 Home page
@@ -69,20 +64,22 @@ export const HomePage = () => {
             <Table>
                 <TableRow>
                     <TableRow><TableData>
-                    <LinkTag to={"/hr"} >HR </LinkTag></TableData></TableRow>
-                    <TableRow><TableData> ACCOUNTING</TableData></TableRow>
+                        <LinkTag to={"/hr"} >HR </LinkTag></TableData></TableRow>
+                    <TableRow><TableData>
+                        <LinkTag to={"/inventorypage"}> ACCOUNTING</LinkTag>
+                    </TableData></TableRow>
                     <TableRow><TableData>
                         <LinkTag to={"/list"} >
                             EMOPLOYEE DIRECTORY
                              </LinkTag>
                     </TableData></TableRow>
                     <TableRow><TableData> CLIENT</TableData></TableRow>
-                    
+
                     <TableRow ><TableData>
-                
+
                         DOCUMENTATION
                         </TableData></TableRow>
-                             
+
                 </TableRow>
             </Table>
         </Fragment>

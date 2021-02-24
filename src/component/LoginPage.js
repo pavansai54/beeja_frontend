@@ -1,6 +1,5 @@
 import React from 'react';
 import Styled from '@emotion/styled';
-// import history from './History';
 import { Link } from 'react-router-dom';
 const Header = Styled.header`
 margin:0;
@@ -74,34 +73,34 @@ padding:4px;
 const Break = Styled.br`
 `;
 
-export  const LoginPage = () => {
-  return(
-  <>
-    <Header />
-    <LeftSplit>
-      <Tittle>
-        tech.at.core
+export const LoginPage = () => {
+  return (
+    <>
+      <Header />
+      <LeftSplit>
+        <Tittle>
+          tech.at.core
       </Tittle>
-    </LeftSplit>
-    <RightSplit >
-      <Heading>Beeja</Heading>
-      <Lable htmlFor="username">Username: </Lable>
-      <Input placeholder="Username" type="text" required />
-      <Break /><Break />
-      <Lable htmlFor="password">Password: </Lable>
-      <Input placeholder="Password" type="password" required />
-      <Break />
-      <Break />
-      
+      </LeftSplit>
+      <RightSplit >
+        <Heading>Beeja</Heading>
+        <Lable htmlFor="username">Username: </Lable>
+        <Input placeholder="Username" type="text" required />
+        <Break /><Break />
+        <Lable htmlFor="password">Password: </Lable>
+        <Input placeholder="Password" type="password" required />
+        <Break />
+        <Break />
+
         <LinkTag to={"/home"}>
-        <Button type="submit" >
-        Login
+          <Button type="submit" >
+            Login
         </Button>
-         
+
         </LinkTag>
-     
-    </RightSplit>
-    <Footer/>
-  </>
-)
+
+      </RightSplit>
+      <Footer />
+    </>
+  )
 };
