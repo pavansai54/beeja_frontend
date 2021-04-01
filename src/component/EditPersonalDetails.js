@@ -68,7 +68,7 @@ text-decoration:none;
 
 export const EditPersonalDetails = () => {
 
-    const { id } = useParams();
+    const { _id } = useParams();
 
 
     const [empState, setState] = useState({
@@ -82,8 +82,8 @@ export const EditPersonalDetails = () => {
     })
 
     const DisplayPD = gql`
-    query PDDisplay($id:String!){
-        personal(id:$id){
+    query PDDisplay($_id:String!){
+        personal(_id:$_id){
             name
             code
             email
@@ -97,7 +97,7 @@ export const EditPersonalDetails = () => {
 
     const EditPd = gql`
      mutation UpdatePersonalDetail($id: String!){
-        updatepersonalDetail(id:$id,data: {
+        updatepersonalDetail(_id:$id,data: {
               name:"${empState.username}",
               code:"${empState.code}",
               email:"${empState.email}",
@@ -111,7 +111,7 @@ export const EditPersonalDetails = () => {
                   }
               }
           `;
-    const { loading, error, data } = useQuery(DisplayPD, { variables: { id: id } });
+    const { loading, error, data } = useQuery(DisplayPD, { variables: { _id: _id } });
 
     const [EditMutation] = useMutation(EditPd);
     if (loading) return <p>Loading....</p>
@@ -128,7 +128,7 @@ export const EditPersonalDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(empState);
-        EditMutation({ variables: { id: id } });
+        EditMutation({ variables: { _id: _id } });
 
     };
 

@@ -93,12 +93,12 @@ font-size:15px;
 
 export const ListOfEmployee = () => {
 
-    const { id } = useParams();
+    const { _id } = useParams();
 
     const Show = gql`
 {
     employeeList{
-    id
+    _id
     name
     code
     email
@@ -112,8 +112,8 @@ export const ListOfEmployee = () => {
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
 
     const DELETE_Employee = gql`
-    mutation DeleteEmployee($id: String!){
-    deleteEmployee(id: $id){
+    mutation DeleteEmployee($_id: String!){
+    deleteEmployee(id: $_id){
     respCode,
     respMessage 
   }
@@ -127,7 +127,7 @@ export const ListOfEmployee = () => {
         if (window.confirm("Do you really want to leave?")) {
             setEmpId({ 'idToDelete': deleteId });
             console.log("handleDelte", deleteId, empId);
-            deleteMutation({ variables: { id: deleteId } });
+            deleteMutation({ variables: { _id: deleteId } });
 
         }
         else {
@@ -163,12 +163,12 @@ export const ListOfEmployee = () => {
                         <TableHeading>Delete</TableHeading>
                     </TableRow>
 
-                    {data.employeeList.map((employee, id) => (
+                    {data.employeeList.map((employee, _id) => (
                         <TableRow>
                             <a href="">
-                                <LinkTag to={`/display/${employee.id}`}>
+                                <LinkTag to={`/display/${employee._id}`}>
                                     <Hover>
-                                        <TableData key={id}>{employee.code}</TableData>
+                                        <TableData key={_id}>{employee.code}</TableData>
                                     </Hover>
                                 </LinkTag>
                             </a>
@@ -180,12 +180,12 @@ export const ListOfEmployee = () => {
                             <TableData>{employee.mobileNo}</TableData>
 
                             <TableData style={{ "text-align": "center" }} >
-                                <LinkTag to={`/edit/${employee.id}`}>
+                                <LinkTag to={`/edit/${employee._id}`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
                             <TableData style={{ "text-align": "center" }} >
-                                <Button onClick={() => handleDelete(employee.id)} >
+                                <Button onClick={() => handleDelete(employee._id)} >
                                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                 </Button>
                             </TableData>

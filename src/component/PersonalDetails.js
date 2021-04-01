@@ -69,7 +69,7 @@ text-decoration:none;
 `;
 
 export const Personal_Details = () => {
-    const { id } = useParams();
+    const { _id } = useParams();
     const [personState, setState] = useState({
         name: "",
         code: "",
@@ -82,8 +82,8 @@ export const Personal_Details = () => {
 
 
     const DisplayPD = gql`
-    query PDDisplay($id:String!){
-        personal(id:$id){
+    query PDDisplay($_id:String!){
+        personal(_id:$_id){
             name
             code
             email
@@ -95,7 +95,7 @@ export const Personal_Details = () => {
     }
     `;
 
-    const { loading, error, data } = useQuery(DisplayPD, { variables: { id: id } });
+    const { loading, error, data } = useQuery(DisplayPD, { variables: { _id: _id } });
 
     if (loading) return <p>Loading....</p>
     if (error) return <p>ERROR....</p>

@@ -25,13 +25,13 @@ function App() {
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/list" component={ListOfEmployee} />
         <Route exact path="/adding" component={CreateEmployee} />
-        <Route exact path="/edit/:id/" component={EditEmployee} />
-        <Route exact path="/display/:id/" component={EmployeeDetails} />
+        <Route exact path="/edit/:_id/" component={EditEmployee} />
+        <Route exact path="/display/:_id/" component={EmployeeDetails} />
         <Route exact path="/hr" component={HR} />
         <Route exact path="/personal" component={PersonalDetails} />
         <Route exact path="/createpresonal" component={Create_PersonalDetails} />
-        <Route exact path="/pd/:id/" component={Personal_Details} />
-        <Route exact path="/editpersonal/:id" component={EditPersonalDetails}/>
+        <Route exact path="/pd/:_id/" component={Personal_Details} />
+        <Route exact path="/editpersonal/:_id" component={EditPersonalDetails}/>
         <Route exact path="/inventorypage" component={InventoryPage}/>
         <Route exact path="/create" component={Create}/>
       </Switch>

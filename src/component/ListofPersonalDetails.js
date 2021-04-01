@@ -73,12 +73,12 @@ const Hover = Styled.a`
     color:blue;
 `;
 export const PersonalDetails = () => {
-    const { id } = useParams();
+    const { _id } = useParams();
     const [empId, setEmpId] = useState({ 'idToDelete': "" });
     const Show = gql`
    query{ 
     personalList{
-        id
+        _id
         name
         code
         email
@@ -103,7 +103,7 @@ export const PersonalDetails = () => {
         if (window.confirm("Do you really want to leave?")) {
             setEmpId({ 'idToDelete': deleteId });
             console.log("handleDelte", deleteId, empId);
-            deleteMutation({ variables: { id: deleteId } });
+            deleteMutation({ variables: { _id: deleteId } });
 
         }
         else {
@@ -138,12 +138,12 @@ export const PersonalDetails = () => {
                         <TableHeading>Edit</TableHeading>
                         <TableHeading>Delete</TableHeading>
                     </TableRow>
-                    {data.personalList.map((emp, id) => (
+                    {data.personalList.map((emp, _id) => (
                         <TableRow>
                             <a href="">
-                                <LinkTag to={`/pd/${emp.id}`}>
+                                <LinkTag to={`/pd/${emp._id}`}>
                                     <Hover>
-                                        <TableData key={id}>{emp.code}</TableData>
+                                        <TableData key={_id}>{emp.code}</TableData>
                                     </Hover>
                                 </LinkTag>
                             </a>
@@ -154,13 +154,13 @@ export const PersonalDetails = () => {
                             <TableData>{emp.account_No}</TableData>
                             <TableData>{emp.ifsc_code}</TableData>
                             <TableData style={{ "text-align": "center" }} >
-                                <LinkTag to={`/editpersonal/${emp.id}`}>
+                                <LinkTag to={`/editpersonal/${emp._id}`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
                             <TableData style={{ "text-align": "center" }} >
 
-                                <Button onClick={() => handleDelete(emp.id)} >
+                                <Button onClick={() => handleDelete(emp._id)} >
                                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                 </Button>
 

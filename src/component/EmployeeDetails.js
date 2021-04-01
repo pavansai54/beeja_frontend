@@ -69,7 +69,7 @@ text-decoration:none;
 
 export const EmployeeDetails = () => {
 
-    const { id } = useParams();
+    const { code } = useParams();
     const [empState, setState] = useState({
         username: "",
         code: "",
@@ -80,8 +80,8 @@ export const EmployeeDetails = () => {
         joinedDate: ""
     })
     const GetEmployeeById = gql`
-    query EmpDetails($id:String!){
-        employee(id:$id){
+    query EmpDetails($code:String!){
+        employee(code:$code){
             name
             code
             email
@@ -93,10 +93,10 @@ export const EmployeeDetails = () => {
     }
     `;
 
-    const { loading, error, data } = useQuery(GetEmployeeById, { variables: { id: id } });
+    const { loading, error, data } = useQuery(GetEmployeeById, { variables: { $code: code } });
 
-    if (loading) return <p>Loading....</p>
-    if (error) return <p>ERROR....</p>
+    // if (loading) return <p>Loading....</p>
+    // if (error) return <p>ERROR....</p>
     if (data && data.employee) {
     empState.name = data.employee.name;
     empState .code = data.employee.code;
@@ -106,8 +106,6 @@ export const EmployeeDetails = () => {
     empState.role = data.employee.role;
     empState.joinedDate = data.employee.joinedDate;
     }
-
-
 
     return (
         <Fragment>
@@ -121,10 +119,8 @@ export const EmployeeDetails = () => {
                 <Table >
 
                     <TableRow>
-
                         <TableColumn ><Lable htmlFor="Name"> Name</Lable></TableColumn>
                         <TableColumn >:<Input value={empState.name} readOnly/></TableColumn>
-
                     </TableRow>
                     <Break />
                     <TableRow>

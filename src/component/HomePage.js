@@ -30,7 +30,7 @@ border: 3px solid #ddd;
 `;
 const TableData = Styled.td`
 border: 3px solid #ddd;
-height:30px;
+height:40px;
 font-size:20px;
 font-weight:bold;
 padding:40px;
