@@ -12,10 +12,13 @@ import { PersonalDetails } from './component/ListofPersonalDetails';
 import { Create_PersonalDetails } from "./component/CreatePersonalDetails";
 import { Personal_Details } from "./component/PersonalDetails"
 import {EditPersonalDetails} from "./component/EditPersonalDetails";
-import {InventoryPage} from "./component/Accounting";
-import {  Create} from "./component/CreateSystemDetail";
+import {AccountingPage} from "./component/Accounting";
+import { CreateSystem } from "./component/CreateSystemDetail";
+import {ListofInventory  } from "./component/ListofInventory";
+import {EditSystem  } from "./component/EditSystemdetails";
+import{SystemDetails} from "./component/SystemDetails"
 import './App.css'
-import { from } from '@apollo/client';
+
 function App() {
   return (
 
@@ -25,15 +28,21 @@ function App() {
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/list" component={ListOfEmployee} />
         <Route exact path="/adding" component={CreateEmployee} />
-        <Route exact path="/edit/:_id/" component={EditEmployee} />
-        <Route exact path="/display/:_id/" component={EmployeeDetails} />
+        <Route exact path="/edit/:code/" component={EditEmployee} />
+        <Route exact path="/display/:code/" component={EmployeeDetails} />
         <Route exact path="/hr" component={HR} />
         <Route exact path="/personal" component={PersonalDetails} />
         <Route exact path="/createpresonal" component={Create_PersonalDetails} />
-        <Route exact path="/pd/:_id/" component={Personal_Details} />
-        <Route exact path="/editpersonal/:_id" component={EditPersonalDetails}/>
-        <Route exact path="/inventorypage" component={InventoryPage}/>
-        <Route exact path="/create" component={Create}/>
+        <Route exact path="/pd/:code/" component={Personal_Details} />
+        <Route exact path="/editpersonal/:code" component={EditPersonalDetails}/>
+        <Route exact path="/ss" component={AccountingPage}/>
+        <Route exact path="/cc" component={CreateSystem}/>
+        <Route exact path="/inv" component={ListofInventory}/>
+        <Route exact path="/eedit/:code/" component={EditSystem}/>
+       
+        <Route exact path="/read/:code/" component={SystemDetails}/>
+
+        
       </Switch>
     </Router>
   );

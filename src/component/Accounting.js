@@ -1,105 +1,75 @@
-import { React, Fragment, useState } from "react";
+import React, { Component, Fragment } from 'react'
 import Styled from '@emotion/styled';
-import { Link, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
-
+import './images/mobile_black.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
+color: ${(props) => props.color};
 position: sticky;
 top: 0px;
-padding: 8px;
-color: ${(props) => props.color};
 font-size: 20px;
-`;
-const Logo = Styled.img`
-height: 30px;
-width: 30px;
-margin-bottom: -5px;
-`;
-const Break = Styled.br`
-`;
-const Button = Styled.button`
-color:black;
-background-color: powderblue;
-height:27px;
-margin-top: -3px;
-font-size: 13px;
-outline: none;
-border: none;
-width: 100px;
-float: right;
-border-radius: 5px;
-&:hover {
-opacity: 0.5;
-`;
-const Container = Styled.form`
-display: flex;
-justify-content: center;
-align-items: center;
 padding: 8px;
-`;
-const Table = Styled.table`
-border-collapse: collapse;
-border: 1px solid #ddd;
-width: 100%;
-padding: 20px;
-`;
-const TableRow = Styled.tr`
-border: 1px solid #ddd;
-&:nth-child(even){background-color: #F2F2F2;}
-&:hover {background-color: #ddd;}
-`;
-const TableData = Styled.td`
-border: 1px solid #ddd;
-height: 30px;
-vertical-align: bottom;
-text-align:left;
-`;
-const TableHeading = Styled.th`
-border: 1px solid #ddd;
-height: 10px;
-padding:8px;
-text-align:left;
+text-align:${(props) => props.text};
 `;
 const LinkTag = Styled(Link)`
 color:black;
 text-decoration:none;
 `;
-const Hover = Styled.a`
-&:hover {
-    color:blue;
+const Logo = Styled.img`
+height: 30px;
+width: 30px;
+margin-bottom:-5px;
 `;
-export const InventoryPage= () => {
+const Table = Styled.table`
+border-collapse: collapse;
+border: 3px solid #ddd;
+`;
+const TableData = Styled.td`
+border: 3px solid #ddd;
+height:100px;
+font-size:20px;
+font-weight:bold;
+vertical-align:bottom;
+text-align:left;
+&:hover {background-color: grey;}
+`;
+const TableRow = Styled.tr`
+
+`;
+const Button = Styled.button`
+background-color:white;
+border:none;
+height:100px;
+font-size:20px;
+width:300px;
+
+ `;
+
+export const AccountingPage= () => {
 
     return (
         <Fragment>
-            <Navbar bgColor="grey" color="white">Inventory Page
-            <Button >
-                   <LinkTag to={"/create"} >
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> ADD
-                        </LinkTag>
-                </Button>
-            </Navbar>
-            <Break />
-            <Container>
-                <Table>
-                    <TableRow>
-                        <TableHeading>ID</TableHeading>
-                        <TableHeading>Name</TableHeading>
-                        <TableHeading>Device</TableHeading>
-                        <TableHeading>Config</TableHeading>
-                        <TableHeading>SL.No/S.Code/Reg.No</TableHeading>
-                        <TableHeading>DeviceHistory</TableHeading>
-                        <TableHeading>Edit</TableHeading>
-                        <TableHeading>Delete</TableHeading>
-                    </TableRow>
-                  </Table>
-            </Container>
-        </Fragment>
-
-    )
+        <Navbar bgColor="grey" color="white" text="center">
+            ACCOUNTING PAGE
+                </Navbar>
+        <Table>
+            <TableRow>
+                <TableRow><TableData><LinkTag to ={"/inv"}> <Button> INVENTORY PAGE</Button></LinkTag></TableData></TableRow>
+                
+                <TableRow><TableData>
+                    <LinkTag to={"/tax"}>
+                       <Button> TAX</Button>
+                    </LinkTag></TableData></TableRow>
+                <TableRow><TableData><Button>PF/ESI</Button></TableData></TableRow>
+                <TableRow><TableData><Button>PAY SLIPS</Button></TableData></TableRow>
+                <TableRow><TableData><Button>EXPENSES</Button></TableData></TableRow>
+                
+            </TableRow>
+        </Table>
+    </Fragment>
+)
 }
-

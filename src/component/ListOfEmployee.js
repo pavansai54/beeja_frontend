@@ -93,7 +93,7 @@ font-size:15px;
 
 export const ListOfEmployee = () => {
 
-    const { _id } = useParams();
+    const { _id,code } = useParams();
 
     const Show = gql`
 {
@@ -109,11 +109,11 @@ export const ListOfEmployee = () => {
     }
   }`;
 
-    const [empId, setEmpId] = useState({ 'idToDelete': "" });
+    const [empCode, setEmpCode] = useState({ 'codeToDelete': "" });
 
     const DELETE_Employee = gql`
-    mutation DeleteEmployee($_id: String!){
-    deleteEmployee(id: $_id){
+    mutation DeleteEmployee($code: String!){
+    deleteEmployee(code: $code){
     respCode,
     respMessage 
   }
@@ -123,11 +123,11 @@ export const ListOfEmployee = () => {
     const { loading, error, data } = useQuery(Show);
     const [deleteMutation] = useMutation(DELETE_Employee);
 
-    const handleDelete = (deleteId) => {
+    const handleDelete = (deleteCode) => {
         if (window.confirm("Do you really want to leave?")) {
-            setEmpId({ 'idToDelete': deleteId });
-            console.log("handleDelte", deleteId, empId);
-            deleteMutation({ variables: { _id: deleteId } });
+            setEmpCode({ 'idToDelete': deleteCode });
+            console.log("handleDelete", deleteCode, empCode);
+            deleteMutation({ variables: { code: deleteCode } });
 
         }
         else {
@@ -163,12 +163,12 @@ export const ListOfEmployee = () => {
                         <TableHeading>Delete</TableHeading>
                     </TableRow>
 
-                    {data.employeeList.map((employee, _id) => (
+                    {data.employeeList.map((employee,code) => (
                         <TableRow>
                             <a href="">
-                                <LinkTag to={`/display/${employee._id}`}>
+                                <LinkTag to={`/display/${employee.code}`}>
                                     <Hover>
-                                        <TableData key={_id}>{employee.code}</TableData>
+                                        <TableData key={code}>{employee.code}</TableData>
                                     </Hover>
                                 </LinkTag>
                             </a>
@@ -180,12 +180,12 @@ export const ListOfEmployee = () => {
                             <TableData>{employee.mobileNo}</TableData>
 
                             <TableData style={{ "text-align": "center" }} >
-                                <LinkTag to={`/edit/${employee._id}`}>
+                                <LinkTag to={`/edit/${employee.code}`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
                             <TableData style={{ "text-align": "center" }} >
-                                <Button onClick={() => handleDelete(employee._id)} >
+                                <Button onClick={() => handleDelete(employee.code)} >
                                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                 </Button>
                             </TableData>

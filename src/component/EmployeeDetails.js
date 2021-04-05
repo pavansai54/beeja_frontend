@@ -58,6 +58,7 @@ const Table = Styled.table`
 const TableData = Styled.td`
 `;
 const TableRow = Styled.tr`
+
 `;
 const TableColumn = Styled.td`
 `;
@@ -69,7 +70,7 @@ text-decoration:none;
 
 export const EmployeeDetails = () => {
 
-    const { code } = useParams();
+    const { code ,id} = useParams();
     const [empState, setState] = useState({
         username: "",
         code: "",
@@ -93,10 +94,8 @@ export const EmployeeDetails = () => {
     }
     `;
 
-    const { loading, error, data } = useQuery(GetEmployeeById, { variables: { $code: code } });
-
-    // if (loading) return <p>Loading....</p>
-    // if (error) return <p>ERROR....</p>
+    const { loading, error, data } = useQuery(GetEmployeeById, { variables: { code: code} });
+ 
     if (data && data.employee) {
     empState.name = data.employee.name;
     empState .code = data.employee.code;

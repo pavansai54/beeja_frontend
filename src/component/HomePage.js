@@ -30,29 +30,31 @@ border: 3px solid #ddd;
 `;
 const TableData = Styled.td`
 border: 3px solid #ddd;
-height:40px;
+height:100px;
 font-size:20px;
 font-weight:bold;
-padding:40px;
 vertical-align:bottom;
 text-align:left;
 &:hover {background-color: grey;}
 `;
 const TableRow = Styled.tr`
-border: 3px solid #ddd;
- &:nth-child(even){background-color: #F2F2F2;}
+
 `;
 const Button = Styled.button`
-color:black;
-background-color: ${props =>
-        props.save ? 'powderblue' : 'white'};
-height:30px;
+background-color:white;
+border:none;
+height:100px;
 font-size:20px;
-width:80px;
-border-radius:5px;
-&:hover {
-opacity:0.5;
-`;
+width:300px;
+
+ `;
+
+ 
+// color:black;
+// border: 3px solid #ddd;
+//  &:nth-child(even){background-color: #F2F2F2;}
+// background-color: ${props =>
+//         props.save ? 'powderblue' : 'white'};
 export const HomePage = () => {
 
     return (
@@ -64,20 +66,22 @@ export const HomePage = () => {
             <Table>
                 <TableRow>
                     <TableRow><TableData>
-                        <LinkTag to={"/hr"} >HR </LinkTag></TableData></TableRow>
+                          <LinkTag to={"/hr"} >
+                          <Button>HR </Button></LinkTag></TableData></TableRow>
                     <TableRow><TableData>
-                        <LinkTag to={"/inventorypage"}> ACCOUNTING</LinkTag>
+                        <LinkTag to={"/ss"}> <Button>ACCOUNTING</Button></LinkTag>
                     </TableData></TableRow>
-                    <TableRow><TableData>
+                   
                         <LinkTag to={"/list"} >
-                            EMOPLOYEE DIRECTORY
+                        <TableRow><TableData><Button>
+                            EMOPLOYEE DIRECTORY</Button></TableData></TableRow>
                              </LinkTag>
-                    </TableData></TableRow>
-                    <TableRow><TableData> CLIENT</TableData></TableRow>
+                    
+                    <TableRow><TableData> <Button> CLIENT </Button></TableData></TableRow>
 
                     <TableRow ><TableData>
-
-                        DOCUMENTATION
+<Button>
+                        DOCUMENTATION</Button>
                         </TableData></TableRow>
 
                 </TableRow>

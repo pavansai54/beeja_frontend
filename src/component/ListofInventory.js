@@ -1,12 +1,9 @@
-import { React, Fragment, useState } from "react";
+import React, { Component, Fragment, useState, } from 'react';
 import Styled from '@emotion/styled';
-import { Link, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus, faEdit, faTrash } from '@fortawesome/free-solCode-svg-icons';
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { useQuery, gql, useMutation } from '@apollo/client';
-import { faEdit, faTrash, faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faSearch, faTruckLoading } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
@@ -94,109 +91,110 @@ font-size:15px;
 `;
 
 
+export const ListofInventory = () => {
+    const{_id,code} = useParams();
 
-export const PersonalDetails = () => {
-    const { code } = useParams();
-    const [empCode, setEmpCode] = useState({ 'CodeToDelete': "" });
-    const Show = gql`
-   query{ 
-    personalList{
-        _id
-        name
-        code
-        email
-        role
-        pan_No
-        account_No
-        ifsc_code
-    }
- }`;
-    const DELETE_PD = gql`
- mutation DeletePD($code: String!){
-    deletePersonalDetails(code: $code){
- respCode,
- respMessage 
-}
-}
-`;
-
-    const { loading, error, data } = useQuery(Show);
-    const [deleteMutation] = useMutation(DELETE_PD);
-    const handleDelete = (deleteCode) => {
-        if (window.confirm("Do you really want to leave?")) {
-            setEmpCode({ 'idToDelete': deleteCode });
-            console.log("handleDelte", deleteCode, empCode);
-            deleteMutation({ variables: { code: deleteCode } });
+    const System = gql`
+    {
+        systemdetailsList{
+            _id
+            name
+            code
+            device
+            devicehistory
+            config
+            respCode
+            respMessage
+            slno_scode_regno
 
         }
-        else {
+    }`;
+    const [invCode,setInvCode] = useState({'codeToDelete': ""});
 
+    const DELETE_INV  =gql`
+    mutation DeleteInventory($code:String!){
+        deleteInventory(code: $code){
+            respCode,
+            respMesssage
         }
-    };
+    }`;
 
-    if (loading) return <p>Loading ...</p>;
-    if (error) return <p>Error</p>;
+      
+      const { loading, error , data }  = useQuery(System);
+      const [deleteMutation] = useMutation(DELETE_INV);
 
-    console.log(data);
+      const handleDelete = (deleteCode) => {
+          if(window.confrim ("Do You really want to Delete? ")){
+              setInvCode({'codeToDelete' : deleteCode});
+              console.log("handleDelete",deleteCode,invCode);
+              deleteMutation({variables:{code:deleteCode}});
+              
+          }
+          else{
+
+          }
+      };
+
+      if (loading) return <p>Loading..</p>;
+      if (error) return <p>ERror</p>;
+
    
     return (
+
         <Fragment>
-            <Navbar bgColor="grey" color="white">Personal Details
-<Button >
-                    <LinkTag to={"/createpresonal"}>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>    ADD</LinkTag>
+            <Navbar bgColor="grey" color="white">
+                List of Inventory
+                
+                <Button >
+                    <LinkTag to={"/cc"}>Add Inventory</LinkTag>
                 </Button>
             </Navbar>
             <Break />
             <Container>
                 <Table>
                     <TableRow>
-                        <TableHeading>Code</TableHeading>
+                        <TableHeading>ID</TableHeading>
                         <TableHeading>Name</TableHeading>
-                        <TableHeading>Email</TableHeading>
-                        <TableHeading>Role</TableHeading>
-                        <TableHeading>PAN</TableHeading>
-                        <TableHeading>Account Number</TableHeading>
-                        <TableHeading>IFSC Code</TableHeading>
+                        <TableHeading>Device</TableHeading>
+                        <TableHeading>Config</TableHeading>
+                        <TableHeading>SL.No/S.Code/Reg.No</TableHeading>
+                        <TableHeading>DeviceHistory</TableHeading>
+                       
                         <TableHeading>Edit</TableHeading>
                         <TableHeading>Delete</TableHeading>
                     </TableRow>
-                    {data.personalList.map((emp, code) => (
+
+
+                    {data.systemdetailsList.map((systemdetails,code) => (
                         <TableRow>
                             <a href="">
-                                <LinkTag to={`/pd/${emp.code}`}>
+                                <LinkTag to={`/read/${systemdetails.code}`}>
                                     <Hover>
-                                        <TableData key={code}>{emp.code}</TableData>
+                                        <TableData key={code}>{systemdetails.code}</TableData>
                                     </Hover>
                                 </LinkTag>
                             </a>
-                            <TableData>{emp.name}</TableData>
-                            <TableData>{emp.email}</TableData>
-                            <TableData>{emp.role}</TableData>
-                            <TableData>{emp.pan_No}</TableData>
-                            <TableData>{emp.account_No}</TableData>
-                            <TableData>{emp.ifsc_code}</TableData>
+                            <TableData>{systemdetails.name}</TableData>
+                            <TableData>{systemdetails.device} </TableData>
+                            <TableData>{systemdetails.config} </TableData>
+                            <TableData>{systemdetails.slno_scode_regno}</TableData>
+                            <TableData>{systemdetails.devicehistory}</TableData>
                             <TableData style={{ "text-align": "center" }} >
-                                <LinkTag to={`/editpersonal/${emp.code}`}>
+                                <LinkTag to={`/eedit/${systemdetails.code}`}>
                                     <FontAwesomeIcon icon={faEdit} ></FontAwesomeIcon>
                                 </LinkTag>
                             </TableData>
                             <TableData style={{ "text-align": "center" }} >
-
-                                <Button onClick={() => handleDelete(emp.code)} >
+                                <Button onClick={() => handleDelete(systemdetails.code)} >
                                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                 </Button>
-
                             </TableData>
-
                         </TableRow>
-                    ))
-                    }
+                    ))}
+
+                   
                 </Table>
             </Container>
-
         </Fragment>
-
     )
 }
-

@@ -146,28 +146,28 @@ export const EditEmployee = () => {
                     <TableRow>
 
                         <TableColumn ><Lable htmlFor="Name"> Name:</Lable></TableColumn>
-                        <TableColumn ><Input type="text" name="username"  onChange={handleChange} required /></TableColumn>
+                        <TableColumn ><Input type="text" name="username" defaultValue={data.employee.name}  onChange={handleChange} required /></TableColumn>
 
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Empl-code"> Employee code: </Lable></TableColumn>
-                        <TableColumn><Input type="text" name="code" onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input type="text" name="code" defaultValue={data.employee.code} onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Email"> Email: </Lable></TableColumn>
-                        <TableColumn><Input type="email" name="email"  onChange={handleChange} required /></TableColumn>
+                        <TableColumn><Input type="email" name="email" defaultValue={data.employee.email} onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Mobile Number"> Mobile Number: </Lable></TableColumn>
-                        <TableColumn><Input placeholder=" +91 " name="mobileNo"  onChange={handleChange} type="number" required /></TableColumn>
+                        <TableColumn><Input placeholder=" +91 " name="mobileNo" defaultValue={data.employee.mobileNo} onChange={handleChange} type="number" required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Department"> Department: </Lable></TableColumn>
-                        <TableColumn><SelectBox className="Selectbox1" name="department"  onChange={handleChange} required>
+                        <TableColumn><SelectBox className="Selectbox1" name="department" defaultValue={data.employee.department} onChange={handleChange} required>
                             <Option disabled selected value> Select an Option</Option>
                             <Option value="HR"> HR </Option>
                             <Option value="ADMIN"> ADMIN </Option>
@@ -178,7 +178,7 @@ export const EditEmployee = () => {
                     <Break />
                     <TableRow>
                         <TableColumn ><Lable htmlFor="Role"> Role: </Lable></TableColumn>
-                        <TableColumn><SelectBox className="Selectbox1" name="role"  onChange={handleChange} required>
+                        <TableColumn><SelectBox className="Selectbox1" name="role" defaultValue={data.employee.role} onChange={handleChange} required>
                             <Option disabled selected value> Select an Option</Option>
                             <Option value="ADMIN"> ADMIN </Option>
                             <Option value="SUPER ADMIN"> SUPER ADMIN </Option>
@@ -190,7 +190,7 @@ export const EditEmployee = () => {
                     <Break />
                     <TableRow>
                         <TableColumn > <Lable htmlFor="Date-Containerat" className="Selectbox1"> Join Date: </Lable></TableColumn>
-                        <TableColumn> <Input type="date" placeholder="dd-mm-yyyy" name="joinedDate"  onChange={handleChange} required /></TableColumn>
+                        <TableColumn> <Input type="date" placeholder="dd-mm-yyyy" name="joinedDate" defaultValue={data.employee.joinedDate} onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>

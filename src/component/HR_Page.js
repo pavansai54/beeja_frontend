@@ -1,4 +1,4 @@
-import { React, Fragment } from "react";
+import React, { Component, Fragment } from 'react'
 import Styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client';
@@ -30,35 +30,30 @@ border: 3px solid #ddd;
 `;
 const TableData = Styled.td`
 border: 3px solid #ddd;
-height:30px;
+height:100px;
 font-size:20px;
 font-weight:bold;
-padding:40px;
 vertical-align:bottom;
 text-align:left;
 &:hover {background-color: grey;}
 `;
 const TableRow = Styled.tr`
-border: 3px solid #ddd;
- &:nth-child(even){background-color: #F2F2F2;}
+
 `;
 const Button = Styled.button`
-color:black;
-background-color: ${props =>
-        props.save ? 'powderblue' : 'white'};
-height:30px;
+background-color:white;
+border:none;
+height:100px;
 font-size:20px;
-width:80px;
-border-radius:5px;
+width:300px;
+
+ `;
+ const Hover = Styled.a`
 &:hover {
-opacity:0.5;
+    color:blue;
 `;
-const Hover = Styled.a`
-a:link{
-    color: black; 
-    text-decoration: none;
-  }
-`;
+
+
 export const HR = () => {
     return (
 
@@ -68,16 +63,16 @@ export const HR = () => {
                     </Navbar>
             <Table>
                 <TableRow>
-                    <TableRow><TableData>LEAVE MANAGEMENT</TableData></TableRow>
+                    <TableRow><TableData><Button>LEAVE MANAGEMENT</Button></TableData></TableRow>
                     <TableRow><TableData>
-                        <Hover href="https://drive.google.com/file/d/1O5XlrbfEO6ZlTeAw762bbXQYoI5Ck0aA/view?usp=sharing">LEAVE POLICY</Hover>
+                        <Hover href="https://drive.google.com/file/d/1O5XlrbfEO6ZlTeAw762bbXQYoI5Ck0aA/view?usp=sharing"><Button>LEAVE POLICY</Button></Hover>
                     </TableData></TableRow>
-                    <TableRow><TableData>
-                        <LinkTag to={"/personal"}>
-                            PERSONAL DETAILS
-                        </LinkTag></TableData></TableRow>
-                    <TableRow><TableData>OFFER LETTER INCREMENT</TableData></TableRow>
-                    <TableRow ><TableData>DOCUMENTS</TableData></TableRow>
+                   
+                        <LinkTag to={"/personal"}> <TableRow><TableData>
+                           <Button> PERSONAL DETAILS</Button></TableData></TableRow>
+                        </LinkTag>
+                    <TableRow><TableData><Button>CTC AND INCREMENTS</Button></TableData></TableRow>
+                    <TableRow ><TableData><Button>DOCUMENTS</Button></TableData></TableRow>
                 </TableRow>
             </Table>
         </Fragment>

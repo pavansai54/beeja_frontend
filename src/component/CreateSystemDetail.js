@@ -68,53 +68,107 @@ color:black;
 text-decoration:none;
 `;
 
-export const Create = () => {
+export const CreateSystem = () => {
+    const [formData, createFormData] = useState({
+        username:"",
+        code: "",
+        device: " ",
+        devicehistory: "",
+        slno_scode_regno: "",
+        config: ""
+       
+    });
+
+    const SystemdetailsList = gql`
+     mutation {
+        createSystemDetails(data: {
+              name:"${formData.username}",
+              code:"${formData.code}",
+              device:"${formData.device}",
+              devicehistory:"${formData.devicehistory}",
+              slno_scode_regno:"${formData.slno_scode_regno}",
+              config:"${formData.config}"
+               
+           })
+                  {
+                      respCode, respMessage
+                  }
+              }
+          `;
+    const [SystemCreate, { loading, error, data }] = useMutation(SystemdetailsList);
+    if (loading) return <p>Loading ...</p>;
+    if (error) return <p>Error</p>;
+
+    const handleChange = (e) => {
+        createFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim()
+        });
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault()
+         SystemCreate();
+        showToast();
+    };
+
+    toast.configure()
+    const showToast = () => {
+    if (error)  { 
+        toast.info('successful');
+    }
+};
+
     return (
         <Fragment>
             <Navbar bgColor="grey" color="white">
-                Add System Details
-            </Navbar>
+                Create an SystemdetailsList
+                        </Navbar>
             <Break />
             <Container >
                 <Table >
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="ID">ID: </Lable></TableColumn>
-                        <TableColumn ><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="Name"> Name: </Lable></TableColumn>
+                        <TableColumn ><Input type="text" name="username" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="Name">Name: </Lable></TableColumn>
-                        <TableColumn><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="Empl-Id"> Employee Id: </Lable></TableColumn>
+                        <TableColumn><Input type="text" name="code" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="Device">Device: </Lable></TableColumn>
-                        <TableColumn><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="device"> device: </Lable></TableColumn>
+                        <TableColumn><Input type="device" name="device" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn > <Lable htmlFor="Config">Config: </Lable></TableColumn>
-                        <TableColumn><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="devicehistory"> devicehistory: </Lable></TableColumn>
+                        <TableColumn><Input type="devicehistory" name="devicehistory" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn > <Lable htmlFor="SL.No/S.Code/Reg.No">SL.No/S.Code/Reg.No: </Lable></TableColumn>
-                        <TableColumn><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="config"> config: </Lable></TableColumn>
+                        <TableColumn><Input type="config" name="config" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
-                        <TableColumn ><Lable htmlFor="DeviceHistory">DeviceHistory: </Lable></TableColumn>
-                        <TableColumn><Input required /></TableColumn>
+                        <TableColumn ><Lable htmlFor="slno_scode_regno"> slno_scode_regno: </Lable></TableColumn>
+                        <TableColumn><Input type="slno_scode_regno" name="slno_scode_regno" onChange={handleChange} required /></TableColumn>
                     </TableRow>
                     <Break />
+                    
 
                     <TableRow>
                         <TableColumn >
-                            <Button >Cancel</Button>
+                            <Button type="Cancel">
+                                <LinkTag to={"/inv"}>Cancel</LinkTag>
+                            </Button>
                         </TableColumn>
 
                         <TableColumn>
-                            <Button >Submit</Button>
+                            <Button onClick={handleSubmit}>
+                                <LinkTag to={"/inv"}>Submit</LinkTag>
+                            </Button>
                         </TableColumn>
                     </TableRow>
 
