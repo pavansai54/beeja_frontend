@@ -1,6 +1,6 @@
 import React, { Fragment, useState,useEffect } from 'react'
 import Styled from '@emotion/styled';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useHistory } from 'react-router-dom';
 import PersonalDetailService from '../services/PersonalDetailService'
 
 const Navbar = Styled.nav`
@@ -68,7 +68,7 @@ text-decoration:none;
 
 
 export const EditPersonalDetails = () => {
-
+    const history = useHistory();
     const { id } = useParams();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -103,7 +103,7 @@ export const EditPersonalDetails = () => {
         e.preventDefault();
         PersonalDetailService.updatePersonalDetail(User, id)
             .then((result) => {
-                window.location.replace("/personal")
+              history.push('/listpersonal');
             })
             .catch(function (error) {
                 console.log(error)

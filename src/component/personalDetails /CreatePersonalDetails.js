@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import Styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import PersonalDetailService from '../services/PersonalDetailService';
 
 const Navbar = Styled.nav`
@@ -66,7 +66,7 @@ color:black;
 text-decoration:none;
 `;
 export const Create_PersonalDetails=()=>{
-
+    const history = useHistory();
     const [formData, createFormData] = useState({
         Name:"",
         code: "",
@@ -90,8 +90,7 @@ export const Create_PersonalDetails=()=>{
         e.preventDefault()
        PersonalDetailService.createPersonalDetail(formData)
             .then(function (response) {
-                console.log(response)
-                    window.location.replace("/personal")
+                    history.push("/listpersonal");
             })
             .catch(function (error) {
                 console.log(error)
