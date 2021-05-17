@@ -8,7 +8,7 @@ import { CreateEmployee } from "./component/employee/CreateEmployee";
 import { EditEmployee } from "./component/employee/EditEmployee";
 import { EmployeeDetails } from "./component/employee/EmployeeDetails";
 import { HR } from "./component/HR_Page";
-import { PersonalDetails } from './component/personalDetails /ListofPersonalDetails';
+import { ListPersonalDetails } from './component/personalDetails /ListofPersonalDetails';
 import { Create_PersonalDetails } from "./component/personalDetails /CreatePersonalDetails";
 import { Personal_Details } from "./component/personalDetails /PersonalDetails"
 import {EditPersonalDetails} from "./component/personalDetails /EditPersonalDetails";
@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/edit/:id/" component={EditEmployee} />
         <Route exact path="/display/:id/" component={EmployeeDetails} />
         <Route exact path="/hr" component={HR} />
-        <Route exact path="/personal" component={PersonalDetails} />
+        <Route exact path="/listpersonal" component={ListPersonalDetails} />
         <Route exact path="/createpresonal" component={Create_PersonalDetails} />
         <Route exact path="/pd/:id/" component={Personal_Details} />
         <Route exact path="/editpersonal/:id" component={EditPersonalDetails}/>

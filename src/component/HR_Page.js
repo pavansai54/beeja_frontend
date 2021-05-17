@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './images/mobile_black.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { faBackward } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = Styled.nav`
 background-color: ${(props) => props.bgColor};
@@ -43,14 +45,18 @@ border: 3px solid #ddd;
 `;
 const Button = Styled.button`
 color:black;
-background-color: ${props =>
-        props.save ? 'powderblue' : 'white'};
-height:30px;
-font-size:20px;
-width:80px;
-border-radius:5px;
+background-color: powderblue;
+height:27px;
+font-size: 20px;
+outline: none;
+border: none;
+width: 80px;
+float: right;
+margin: -1px 15px;
+cursor: pointer;
+border-radius: 5px;
 &:hover {
-opacity:0.5;
+opacity: 0.5;
 `;
 const Hover = Styled.a`
 a:link{
@@ -63,20 +69,33 @@ export const HR = () => {
 
         <Fragment>
             <Navbar bgColor="grey" color="white" text="center">
+                <Button>
+                    <LinkTag to={"/home"}>
+                        <FontAwesomeIcon icon={faBackward}></FontAwesomeIcon>
+                    </LinkTag>
+                </Button>
                 HR
-                    </Navbar>
+             </Navbar>
             <Table>
                 <TableRow>
-                    <TableRow><TableData>LEAVE MANAGEMENT</TableData></TableRow>
-                    <TableRow><TableData>
-                        <Hover href="https://drive.google.com/file/d/1O5XlrbfEO6ZlTeAw762bbXQYoI5Ck0aA/view?usp=sharing">LEAVE POLICY</Hover>
-                    </TableData></TableRow>
-                    <TableRow><TableData>
-                        <LinkTag to={"/personal"}>
-                            PERSONAL DETAILS
-                        </LinkTag></TableData></TableRow>
-                    <TableRow><TableData>OFFER LETTER INCREMENT</TableData></TableRow>
-                    <TableRow ><TableData>DOCUMENTS</TableData></TableRow>
+                    <TableRow>
+                        <TableData>LEAVE MANAGEMENT</TableData>
+                    </TableRow>
+                    <TableRow>
+                        <TableData>LEAVE POLICY</TableData>
+                        {/* <Hover href="https://drive.google.com/file/d/1O5XlrbfEO6ZlTeAw762bbXQYoI5Ck0aA/view?usp=sharing">LEAVE POLICY</Hover> */}
+                    </TableRow>
+                    <TableRow>
+                        <TableData>
+                            <LinkTag to={"/listpersonal"}>PERSONAL DETAILS</LinkTag>
+                        </TableData>
+                    </TableRow>
+                    <TableRow>
+                        <TableData>OFFER LETTER INCREMENT</TableData>
+                    </TableRow>
+                    <TableRow >
+                        <TableData>DOCUMENTS</TableData>
+                    </TableRow>
                 </TableRow>
             </Table>
         </Fragment>

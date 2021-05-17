@@ -2,7 +2,7 @@ import { React, Fragment, useState, useEffect, useCallback } from "react";
 import Styled from '@emotion/styled';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faTrash, faHome} from '@fortawesome/free-solid-svg-icons';
 import PersonalDetailService from '../services/PersonalDetailService';
 
 const Navbar = Styled.nav`
@@ -23,13 +23,14 @@ const Break = Styled.br`
 const Button = Styled.button`
 color:black;
 background-color: powderblue;
-height:27px;
-margin-top: -3px;
-font-size: 13px;
+height:30px;
+font-size: 15px;
 outline: none;
 border: none;
 width: 100px;
 float: right;
+margin: -1px 15px;
+cursor: pointer;
 border-radius: 5px;
 &:hover {
 opacity: 0.5;
@@ -71,7 +72,16 @@ const Hover = Styled.a`
 &:hover {
     color:blue;
 `;
-export const PersonalDetails = () => {
+
+const Input = Styled.input`
+border-radius:5px;
+width:230px;
+margin-left:47%;
+height:24px;
+font-size:15px;
+`;
+
+export const ListPersonalDetails = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setdata] = useState([]);
@@ -112,9 +122,16 @@ export const PersonalDetails = () => {
         return (
             <Fragment>
                 <Navbar bgColor="grey" color="white">Personal Details
-                <Button >
+                <Input type="text" placeholder="Search" ></Input>
+                    <Button>
+                        <LinkTag to={"/home"}>
+                            <FontAwesomeIcon icon={faHome}></FontAwesomeIcon> home
+                        </LinkTag>
+                    </Button>
+                    <Button>
                         <LinkTag to={"/createpresonal"}>
-                            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>    ADD</LinkTag>
+                            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> ADD
+                        </LinkTag>
                     </Button>
                 </Navbar>
                 <Break />
