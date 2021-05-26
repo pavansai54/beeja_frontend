@@ -6,7 +6,7 @@
 .pnp.js
 .vscode/
 
-# Local History for Visual Studio Code
+# Local History for Visual ßStudio Code
 .history/
 
 
@@ -29,4 +29,5 @@ yarn-error.log*
 
 ##vscode
 
-
+.eslintrc.json
+.eslintcache
