@@ -63,24 +63,21 @@ export const EditEmployee = () => {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [empState, setState] = useState({
-        
-		
-        firstName: '',
-        lastname: '',
-        designation: ' ',
-        department: '',
-        email: '',
-        contactNo: '',
-        joiningDate: '',
+        firstName:"",
+        lastname:"",
+        designation:"",
+        department: "",
+        email:"",
+        contactNo:"",
+        joiningDate:""
     })
     const handleChange = e => {
         setState({
             ...empState,
             [e.target.name]: e.target.value.trim(),
-        })
+        });
     }
     const User = {
-      
         firstName: `${empState.firstName}`,
         lastName: `${empState.lastName}`,
         designation: `${empState.designation}`,
@@ -90,21 +87,20 @@ export const EditEmployee = () => {
         joiningDate: `${empState.joiningDate}`,
     }
     const HandleSubmit = async e => {
-		e.preventDefault()
-		EmployeeService.updateEmployeeDetail(User, id)
-			.then(result => {
-                console.log(result)
-				history.push('/list')
-			})
-			.catch(function(error) {
-				console.log(error)
-			})
-	}
-
+        e.preventDefault()
+        EmployeeService.updateEmployeeDetail(id,User)
+            .then(result1 => {
+                
+                alert("Successfully Updated!!")
+                history.push('/list')
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
     useEffect(() => {
         EmployeeService.getOneEmployeeDetail(id).then(
             result => {
-				
                 setIsLoaded(true)
                 setState(result.data)
             },
@@ -114,7 +110,6 @@ export const EditEmployee = () => {
             }
         )
     }, [])
-
     if (error) {
         return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
@@ -158,14 +153,11 @@ export const EditEmployee = () => {
                         </TableColumn>
                     </TableRow>
                     <Break />
-                   
                     <TableRow>
                         <TableColumn>
-                            {' '}
                             <Lable htmlFor='designation'> Designation: </Lable>
                         </TableColumn>
                         <TableColumn>
-                            {' '}
                             <SelectBox
                                 className='Selectbox1'
                                 name='designation'
@@ -175,18 +167,15 @@ export const EditEmployee = () => {
                             >
                                 Select an Option
                                 <Option disabled selected value>
-                                    {' '}
                                     Select an Option
                                 </Option>
                                 <Option value='ASSOCIATE SOFTWARE ENGINEER'>
-                                    {' '}
                                     Associate Software Engineer
                                 </Option>
                                 <Option value='HR'> HR</Option>
                                 <Option value='QA'> QA</Option>
                                 <Option value='SOFTWARE ENGINEER'> Software Engineer </Option>
                                 <Option value='SR . SOFTWARE ENGINEER'>
-                                    {' '}
                                     Sr. Software Engineer
                                 </Option>
                                 <Option value='TECH LEAD'> Tech Lead</Option>
@@ -196,7 +185,6 @@ export const EditEmployee = () => {
                     <Break />
                     <TableRow>
                         <TableColumn>
-                            {' '}
                             <Lable htmlFor='department'> Department: </Lable>
                         </TableColumn>
                         <TableColumn>
@@ -206,9 +194,7 @@ export const EditEmployee = () => {
                                 value={empState.department}
                                 onChange={handleChange}
                                 required
-                            >
-                                <Option disabled selected value>
-                                    {' '}
+                            >   <Option disabled selected value>
                                     Select an Option
                                 </Option>
                                 <Option value='HR'> HR </Option>
@@ -231,13 +217,11 @@ export const EditEmployee = () => {
                                 onChange={handleChange}
                                 required
                             />
-                           
                         </TableColumn>
                     </TableRow>
                     <Break />
                     <TableRow>
                         <TableColumn>
-                            {' '}
                             <Lable htmlFor='contactNo'> Contact Number </Lable>
                         </TableColumn>
                         <TableColumn>
@@ -254,10 +238,7 @@ export const EditEmployee = () => {
                     <Break />
                     <TableRow>
                         <TableColumn>
-                            <Lable htmlFor='Date-Containerat' className='Selectbox1'>
-                                {' '}
-                                Joining Date:{' '}
-                            </Lable>
+                            <Lable htmlFor='Date-Containerat'>Joining Date:</Lable>
                         </TableColumn>
                         <TableColumn>
                             <Input
@@ -276,9 +257,7 @@ export const EditEmployee = () => {
                             </Button>
                         </TableColumn>
                         <TableColumn>
-                            
                             <Button onClick={HandleSubmit}>Submit </Button>
-                           
                         </TableColumn>
                     </TableRow>
                 </Table>

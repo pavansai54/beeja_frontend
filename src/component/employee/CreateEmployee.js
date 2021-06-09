@@ -67,25 +67,25 @@ text-decoration:none;
 export const CreateEmployee = () => {
     const history = useHistory()
     const [formData, createFormData] = useState({
-        firstName: '',
-        lastName: '',
-        designation: ' ',
-        department: '',
-        email: '',
-        contactNo: '',
-        joiningDate: '',
+        firstName:"",
+        lastName:"",
+        designation:"",
+        department:"",
+        email:"",
+        contactNo:"",
+        joiningDate:""
     })
     const handleChange = e => {
         createFormData({
             ...formData,
             [e.target.name]: e.target.value.trim(),
-        })
-    }
+        });
+    };
     const handleSubmit = e => {
 		e.preventDefault()
 		EmployeeService.createEmployeeDetail(formData)
 			.then(function(response) {
-                console.log(response)
+               
                 alert("Successfully Created!")
 				history.push('/list')
 			})
@@ -189,6 +189,7 @@ export const CreateEmployee = () => {
                             <Input
                                 type='email'
                                 name='email'
+                                defaultValue='@techatcore.com'
                                 onChange={handleChange}
                                 required
                             />
@@ -213,7 +214,7 @@ export const CreateEmployee = () => {
                     <Break />
                     <TableRow>
                         <TableData>
-                            <Lable htmlFor='joiningDate' className='Selectbox1'>
+                            <Lable htmlFor='joiningDate' >
                                 joiningDate:
                             </Lable>
                         </TableData>
@@ -235,11 +236,11 @@ export const CreateEmployee = () => {
                             </Button>
                         </TableColumn>
                         <TableColumn>
-                            <Button onClick={handleSubmit}><LinkTag to={'/list'}>Submit</LinkTag></Button>
+                            <Button onClick={handleSubmit}>Submit</Button>
                         </TableColumn>
                     </TableRow>
-                </Table>{' '}
-            </Container>{' '}
+                </Table>
+            </Container>
         </Fragment>
     )
 }

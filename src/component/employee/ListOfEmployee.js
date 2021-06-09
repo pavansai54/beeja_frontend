@@ -113,7 +113,7 @@ export const ListOfEmployee = () => {
             EmployeeService.getAllEmployeeDetail().then(
                 result => {
                     setIsLoaded(true)
-					console.log(result.data)
+					
                     setdata(result.data)
                 },
                 error => {
@@ -148,7 +148,7 @@ export const ListOfEmployee = () => {
                 <Container>
                     <Table>
                         <TableRow>
-                            <TableHeading>ID</TableHeading>
+                            
 							<TableHeading>Code</TableHeading>
                             <TableHeading>FirstName</TableHeading>
                             <TableHeading>LastName</TableHeading>
@@ -163,10 +163,10 @@ export const ListOfEmployee = () => {
                         </TableRow>
                         {data.map(employee => (
                             <TableRow>
-                                <LinkTag to={`/display/${employee._id}`}>
-                                    <TableData key={employee._id}>{employee._id}</TableData>
-                                </LinkTag>
-								<TableData>{employee.code}</TableData>
+                              
+                                    
+                                
+								<TableData><LinkTag to={`/display/${employee._id}`}>{employee.code}</LinkTag></TableData>
                                 <TableData>{employee.firstName}</TableData>
                                 <TableData>{employee.lastName}</TableData>
                                
