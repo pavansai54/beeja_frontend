@@ -2,9 +2,8 @@ import React, { Fragment, useState } from 'react'
 import Styled from '@emotion/styled'
 import { Link, useHistory } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Email from 'react-email-autocomplete';
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
 position: sticky;
@@ -56,188 +55,218 @@ padding:20px;
 `
 const Table = Styled.table`
 `
-const TableData = Styled.td`
+const TableBody = Styled.tbody`
 `
+
 const TableRow = Styled.tr`
 `
-const TableColumn = Styled.td`
+const TableData = Styled.td`
+padding:10px;
 `
-const LinkTag = Styled(Link)` 
-color:black; 
+const LinkTag = Styled(Link)`
+color:black;
 text-decoration:none;
 `
-
 export const CreateEmployee = () => {
-	const history = useHistory()
-	const [formData, createFormData] = useState({
-		name: '',
-		code: '',
-		email: ' ',
-		mobile: '',
-		department: '',
-		joinedDate: '',
-		role: '',
-	})
 
-	const handleChange = e => {
-		createFormData({
-			...formData,
-			[e.target.name]: e.target.value.trim(),
-		})
-	}
+    const customDomains = ['techatcore.com']
 
-	const handleSubmit = e => {
+    const history = useHistory()
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [formData, createFormData] = useState({
+        firstName: '',
+        lastName: '',
+        designation: ' ',
+        department: '',
+        email:'' ,
+        contactNo: '',
+        joiningDate: '',
+    })
+    const handleChange = e => {
+        createFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
+        })
+    }
+    const handleSubmit = e => {
 		e.preventDefault()
 		EmployeeService.createEmployeeDetail(formData)
 			.then(function(response) {
+                console.log(response)
+                alert("Successfully Created!")
+                setIsLoaded(false)
 				history.push('/list')
+               
 			})
 			.catch(function(error) {
 				console.log(error)
 			})
 	}
-
-	return (
-		<Fragment>
-			<Navbar bgColor='grey' color='white'>
-				Create an Employee
-			</Navbar>
-			<Break />
-			<Container>
-				<Table>
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Name'> Name: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input type='text' name='name' onChange={handleChange} required />
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Empl-Id'> Employee Id: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input type='text' name='code' onChange={handleChange} required />
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Email'> Email: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								type='email'
-								name='email'
-								onChange={handleChange}
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							{' '}
-							<Lable htmlFor='Mobile Number'> Mobile Number: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								placeholder=' +91 '
-								name='mobile'
-								onChange={handleChange}
-								type='number'
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							{' '}
-							<Lable htmlFor='Department'> Department: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<SelectBox
-								className='Selectbox1'
-								name='department'
-								onChange={handleChange}
-								required
-							>
-								<Option disabled selected value>
-									{' '}
-									Select an Option
-								</Option>
-								<Option value='HR'> HR </Option>
-								<Option value='ADMIN'> ADMIN </Option>
-								<Option value='ACCOUNTING'> ACCOUNTING </Option>
-								<Option value='IT'> IT </Option>
-							</SelectBox>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Role'> Role: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<SelectBox
-								className='Selectbox1'
-								name='role'
-								onChange={handleChange}
-								required
-							>
-								<Option disabled selected value>
-									{' '}
-									Select an Option
-								</Option>
-								<Option value='ADMIN'> ADMIN </Option>
-								<Option value='SUPER ADMIN'> SUPER ADMIN </Option>
-								<Option value='ACCOUNTANT'> ACCOUNTANT </Option>
-								<Option value='SOFTWARE ENGINEER'> SOFTWARE ENGINEER </Option>
-								<Option value='SENIOR-SOFTWARE ENGINEER'>
-									{' '}
-									SENIOR-SOFTWARE ENGINEER{' '}
-								</Option>
-							</SelectBox>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Date-Containerat' className='Selectbox1'>
-								{' '}
-								Join Date:{' '}
-							</Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								type='date'
-								placeholder='dd-mm-yyyy'
-								name='joinedDate'
-								onChange={handleChange}
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Button type='Cancel'>
-								<LinkTag to={'/list'}>Cancel</LinkTag>
-							</Button>
-						</TableColumn>
-
-						<TableColumn>
-							<Button onClick={handleSubmit}>
-								Submit
-								{/* <LinkTag to={"/list"}>Submit</LinkTag> */}
-							</Button>
-						</TableColumn>
-					</TableRow>
-				</Table>
-			</Container>
-		</Fragment>
-	)
-}
+   
+    console.log(formData.email + customDomains)
+    return (
+        <Fragment>
+            <Navbar bgColor='grey' color='white'>
+                Create an Employee
+            </Navbar>
+            <Break />
+            <Container>
+                <Table>
+            <TableBody>
+                    <TableRow>
+                     <TableData>
+                            <Lable htmlFor='firstName'> firstName: </Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                             autoComplete='off'
+                                type='text'
+                                name='firstName'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                    
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='lastName'> lastName: </Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                             autoComplete='off'
+                                type='text'
+                                name='lastName'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                 
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='designation'> designation: </Lable>
+                        </TableData>
+                        <TableData>
+                            <SelectBox 
+                                className='Selectbox1'
+                                name='designation'
+                                onChange={handleChange}
+                                required
+                            >
+                                Select an Option
+                                <Option disable select value>
+                                    Select an Option
+                                </Option>
+                                <Option value='ASSOCIATE SOFTWARE ENGINEER'>
+                                    Associate Software Engineer
+                                </Option>
+                                <Option value='HR'> HR</Option>
+                                <Option value='QA'> QA</Option>
+                                <Option value='SOFTWARE ENGINEER'> Software Engineer </Option>
+                                <Option value='SR . SOFTWARE ENGINEER'>
+                                    Sr. Software Engineer
+                                </Option>
+                                <Option value='TECH LEAD'> Tech Lead</Option>
+                            </SelectBox>
+                        </TableData>
+                    </TableRow>
+                  
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='department'> department: </Lable>
+                        </TableData>
+                        <TableData>
+                            <SelectBox
+                          
+                                className='Selectbox1'
+                                name='department'
+                                onChange={handleChange}
+                                required
+                            >
+                                 <Option disable select value>
+                                    Select an Option
+                                </Option>
+                                <Option value='HR'> HR </Option>
+                                <Option value='ADMIN'> ADMIN </Option>
+                                <Option value='ACCOUNTING'> ACCOUNTING </Option>
+                                <Option value='IT'> IT </Option>
+                            </SelectBox>
+                        </TableData>
+                    </TableRow>
+                 
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='email'> email: </Lable>
+                        </TableData>
+                        <TableData>
+                            
+                            <Input
+                             autoComplete='off'
+                                type='email'
+                                name='email'
+                                defaultValue='@techatcore.com'
+                                onChange={handleChange}
+                                required
+                            />
+                            
+                            {/* <Email 
+                                type='email'
+                                name='email'
+                                autoComplete='off' 
+                               domains={customDomains}
+                                onChange={handleChange} 
+                                />  */}
+                        
+                        </TableData>
+                    </TableRow>
+                    
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='contactNo'> contactNo</Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                                placeholder=' +91 '
+                                name='contactNo'
+                                onChange={handleChange}
+                                type='number'
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                  
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='joiningDate' className='Selectbox1'>
+                                joiningDate:
+                            </Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                                type='date'
+                                placeholder='dd-mm-yyyy'
+                                name='joiningDate'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                   
+                    <TableRow>
+                        <TableData>
+                            <Button type='Cancel'>
+                                <LinkTag to={'/list'}>Cancel</LinkTag>
+                            </Button>
+                        </TableData>
+                        <TableData>
+                            <Button onClick={handleSubmit}><LinkTag to={'/list'}>Submit</LinkTag></Button>
+                        </TableData>
+                    </TableRow>
+                    </TableBody>
+                </Table>
+            </Container>
+        </Fragment>
+            )
+        }
+        
