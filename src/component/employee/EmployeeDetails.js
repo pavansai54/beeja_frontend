@@ -155,7 +155,7 @@ export const EmployeeDetails = () => {
                     <TableRow>
                         <TableData>
                             {' '}
-                            <Lable htmlFor='email'>Email </Lable>
+                            <Lable htmlFor='email'>Email</Lable>
                         </TableData>
                         <TableData>
                             :<Input value={empState.email} readOnly />
