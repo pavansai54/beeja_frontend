@@ -205,7 +205,7 @@ export const CreateEmployee = () => {
                                 type='email'
                                 name='email'
                                 defaultValue='@techatcore.com'
-                                onChange={handleChange}
+                                 onChange={handleChange}
                                 required
                             />
                             
