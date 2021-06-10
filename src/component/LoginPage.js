@@ -111,6 +111,7 @@ export const LoginPage = () => {
                 <Heading>Beeja</Heading>
                 <Lable htmlFor='username'>Username: </Lable>
                 <Input
+                    autoComplete='off'
                     type='text'
                     name='username'
                     placeholder='Username'
@@ -121,6 +122,7 @@ export const LoginPage = () => {
                 <Break />
                 <Lable htmlFor='password'>Password: </Lable>
                 <Input 
+                    autoComplete='off'
                     placeholder='Password'
                     name='password'
                     type='password'

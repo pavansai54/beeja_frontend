@@ -17,11 +17,6 @@ padding: 8px;
 color: ${props => props.color};
 font-size: 20px;
 `
-const Logo = Styled.img`
-height: 30px;
-width: 30px;
-margin-bottom: -5px;
-`
 const Break = Styled.br`
 `
 const Button = Styled.button`
@@ -51,9 +46,11 @@ border: 1px solid #ddd;
 width: 100%;
 padding: 20px;
 `
+const TableBody =Styled.tbody`
+`
 const TableRow = Styled.tr`
 border: 1px solid #ddd;
-&:nth-child(even){background-color: #F2F2F2;}
+&::nth-of-type(even){background-color: #F2F2F2;}
 &:hover {background-color: #ddd;}
 `
 const TableData = Styled.td`
@@ -67,23 +64,6 @@ border: 1px solid #ddd;
 height: 10px;
 padding:8px;
 text-align:left;
-`
-const Actionbutton = Styled.button`
-height:15px;
-width:15px;
-display:inline-block;
-background-color:rgba(255,255,255,0.7);
-border:1px solid gray;
-`
-const IdButton = Styled.button`
-`
-const LinkTag = Styled(Link)`
-color:black;
-text-decoration:none;
-`
-const Hover = Styled.a`
-&:hover {
-    color:blue;
 `
 const Input = Styled.input`
 border-radius:5px;
@@ -113,7 +93,7 @@ export const ListOfEmployee = () => {
             EmployeeService.getAllEmployeeDetail().then(
                 result => {
                     setIsLoaded(true)
-					
+					console.log(result.data)
                     setdata(result.data)
                 },
                 error => {
@@ -134,21 +114,21 @@ export const ListOfEmployee = () => {
                     List of Employee
                     <Input type='text' placeholder='Search'></Input>
                     <Button>
-                        <LinkTag to={'/home'}>
+                        <Link to={'/home'} style={{ 'color': 'black'}}>
                             <FontAwesomeIcon icon={faHome}></FontAwesomeIcon> home
-                        </LinkTag>
+                        </Link>
                     </Button>
                     <Button>
-                        <LinkTag to={'/adding'}>
+                        <Link to={'/adding'} style={{ 'color': 'black'}}>
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Add
-                        </LinkTag>
+                        </Link>
                     </Button>
                 </Navbar>
                 <Break />
                 <Container>
                     <Table>
+                        <TableBody>
                         <TableRow>
-                            
 							<TableHeading>Code</TableHeading>
                             <TableHeading>FirstName</TableHeading>
                             <TableHeading>LastName</TableHeading>
@@ -157,40 +137,39 @@ export const ListOfEmployee = () => {
                             <TableHeading>Email</TableHeading>
                             <TableHeading>ContactNo</TableHeading>
                             <TableHeading>joiningDate</TableHeading>
-							
                             <TableHeading>Edit</TableHeading>
                             <TableHeading>Delete</TableHeading>
                         </TableRow>
                         {data.map(employee => (
-                            <TableRow>
-                              
-                                    
-                                
-								<TableData><LinkTag to={`/display/${employee._id}`}>{employee.code}</LinkTag></TableData>
+                            <TableRow key={employee._id}>  
+								<TableData >
+                                <Link to={`/display/${employee._id}`}  style={{ 'color': 'black'}} >
+                                    {employee.code}
+                                </Link>
+                                </TableData>
                                 <TableData>{employee.firstName}</TableData>
                                 <TableData>{employee.lastName}</TableData>
-                               
                                 <TableData>{employee.designation}</TableData>
 								<TableData>{employee.department}</TableData>
                                 <TableData>{employee.email}</TableData>
                                 <TableData>{employee.contactNo}</TableData>
                                 <TableData>{employee.joiningDate}</TableData>
-								
-                                <TableData style={{ 'text-align': 'center' }}>
-                                    <LinkTag to={`/edit/${employee._id}`}>
-                                        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-                                    </LinkTag>
+                                <TableData style={{ 'textAlign': 'center','color':'black' }}>
+                                    <Link to={`/edit/${employee._id}`}>
+                                        <FontAwesomeIcon style={{ 'color': 'black'}} icon={faEdit}></FontAwesomeIcon>
+                                    </Link >
                                 </TableData>
-                                <TableData style={{ 'text-align': 'center' }}>
-                                    <LinkTag>
-                                        <FontAwesomeIcon
+                                <TableData style={{ 'textAlign': 'center'}}>
+                                    <Link to='/list' >
+                                        <FontAwesomeIcon style={{ 'color': 'black'}}
                                             icon={faTrash}
                                             onClick={() => deleteEmployee(employee._id)}
                                         ></FontAwesomeIcon>
-                                    </LinkTag>
+                                    </Link>
                                 </TableData>
                             </TableRow>
                         ))}
+                        </TableBody>
                     </Table>
                 </Container>
             </Fragment>

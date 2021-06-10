@@ -49,9 +49,12 @@ padding:20px;
 `
 const Table = Styled.table`
 `
+const TableBody = Styled.tbody`
+`
 const TableRow = Styled.tr`
 `
-const TableColumn = Styled.td`
+const TableData = Styled.td`
+padding:10px;
 `
 const LinkTag = Styled(Link)`
 color:black;
@@ -63,13 +66,15 @@ export const EditEmployee = () => {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [empState, setState] = useState({
-        firstName:"",
-        lastname:"",
-        designation:"",
-        department: "",
-        email:"",
-        contactNo:"",
-        joiningDate:""
+        
+		
+        firstName: '',
+        lastname: '',
+        designation: ' ',
+        department: '',
+        email: '',
+        contactNo: '',
+        joiningDate: '',
     })
     const handleChange = e => {
         setState({
@@ -123,11 +128,12 @@ export const EditEmployee = () => {
             <Break />
             <Container>
                 <Table>
+                    <TableBody>
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='firstName'> FirstName: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
                                 type='text'
                                 name='firstName'
@@ -135,14 +141,14 @@ export const EditEmployee = () => {
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+        
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='lastName'> lastName: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
                                 type='text'
                                 name='lastName'
@@ -150,14 +156,16 @@ export const EditEmployee = () => {
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                   
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
+
                             <Lable htmlFor='designation'> Designation: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
+                            
                             <SelectBox
                                 className='Selectbox1'
                                 name='designation'
@@ -166,35 +174,40 @@ export const EditEmployee = () => {
                                 required
                             >
                                 Select an Option
-                                <Option disabled selected value>
+                                <Option disabled select value>
+                                  
                                     Select an Option
                                 </Option>
                                 <Option value='ASSOCIATE SOFTWARE ENGINEER'>
+                                   
                                     Associate Software Engineer
                                 </Option>
                                 <Option value='HR'> HR</Option>
                                 <Option value='QA'> QA</Option>
                                 <Option value='SOFTWARE ENGINEER'> Software Engineer </Option>
                                 <Option value='SR . SOFTWARE ENGINEER'>
+                                   
                                     Sr. Software Engineer
                                 </Option>
                                 <Option value='TECH LEAD'> Tech Lead</Option>
                             </SelectBox>
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+             
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='department'> Department: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <SelectBox
                                 className='Selectbox1'
                                 name='department'
                                 value={empState.department}
                                 onChange={handleChange}
                                 required
-                            >   <Option disabled selected value>
+                            >
+                                <Option disabled select value>
+                                   
                                     Select an Option
                                 </Option>
                                 <Option value='HR'> HR </Option>
@@ -202,14 +215,14 @@ export const EditEmployee = () => {
                                 <Option value='ACCOUNTING'> ACCOUNTING </Option>
                                 <Option value='IT'> IT </Option>
                             </SelectBox>
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+         
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='email'> Email: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
                                 type='email'
                                 name='email'
@@ -217,14 +230,16 @@ export const EditEmployee = () => {
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                           
+                        </TableData>
                     </TableRow>
-                    <Break />
+               
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
+                          
                             <Lable htmlFor='contactNo'> Contact Number </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
                                 placeholder=' +91 '
                                 name='contactNo'
@@ -233,33 +248,39 @@ export const EditEmployee = () => {
                                 type='number'
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                  
                     <TableRow>
-                        <TableColumn>
-                            <Lable htmlFor='Date-Containerat'>Joining Date:</Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        <TableData>
+                            <Lable htmlFor='Date-Containerat' className='Selectbox1'>
+                                
+                                Joining Date:
+                            </Lable>
+                        </TableData>
+                        <TableData>
                             <Input
                                 name='joiningDate'
                                 value={empState.joiningDate}
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+            
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Button type='Cancel'>
                                 <LinkTag to={'/list'}>Cancel</LinkTag>
                             </Button>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
+                            
                             <Button onClick={HandleSubmit}>Submit </Button>
-                        </TableColumn>
+                           
+                        </TableData>
                     </TableRow>
+                    </TableBody>
                 </Table>
             </Container>
         </Fragment>

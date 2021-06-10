@@ -3,6 +3,7 @@ import Styled from '@emotion/styled'
 import { Link, useHistory } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
 import 'react-toastify/dist/ReactToastify.css'
+import Email from 'react-email-autocomplete';
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
 position: sticky;
@@ -54,26 +55,32 @@ padding:20px;
 `
 const Table = Styled.table`
 `
-const TableData = Styled.td`
+const TableBody = Styled.tbody`
 `
+
 const TableRow = Styled.tr`
 `
-const TableColumn = Styled.td`
+const TableData = Styled.td`
+padding:10px;
 `
 const LinkTag = Styled(Link)`
 color:black;
 text-decoration:none;
 `
 export const CreateEmployee = () => {
+
+    const customDomains = ['techatcore.com']
+
     const history = useHistory()
+    const [isLoaded, setIsLoaded] = useState(false)
     const [formData, createFormData] = useState({
-        firstName:"",
-        lastName:"",
-        designation:"",
-        department:"",
-        email:"",
-        contactNo:"",
-        joiningDate:""
+        firstName: '',
+        lastName: '',
+        designation: ' ',
+        department: '',
+        email:'' ,
+        contactNo: '',
+        joiningDate: '',
     })
     const handleChange = e => {
         createFormData({
@@ -88,11 +95,14 @@ export const CreateEmployee = () => {
                
                 alert("Successfully Created!")
 				history.push('/list')
+               
 			})
 			.catch(function(error) {
 				console.log(error)
 			})
 	}
+   
+    console.log(formData.email + customDomains)
     return (
         <Fragment>
             <Navbar bgColor='grey' color='white'>
@@ -101,48 +111,50 @@ export const CreateEmployee = () => {
             <Break />
             <Container>
                 <Table>
-            
+            <TableBody>
                     <TableRow>
-                        <TableColumn>
+                     <TableData>
                             <Lable htmlFor='firstName'> firstName: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
+                             autoComplete='off'
                                 type='text'
                                 name='firstName'
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                    
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='lastName'> lastName: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <Input
+                             autoComplete='off'
                                 type='text'
                                 name='lastName'
                                 onChange={handleChange}
                                 required
                             />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break/>
+                 
                     <TableRow>
                         <TableData>
                             <Lable htmlFor='designation'> designation: </Lable>
                         </TableData>
                         <TableData>
-                            <SelectBox
+                            <SelectBox 
                                 className='Selectbox1'
                                 name='designation'
                                 onChange={handleChange}
                                 required
                             >
                                 Select an Option
-                                <Option disabled selected value>
+                                <Option disable select value>
                                     Select an Option
                                 </Option>
                                 <Option value='ASSOCIATE SOFTWARE ENGINEER'>
@@ -158,19 +170,20 @@ export const CreateEmployee = () => {
                             </SelectBox>
                         </TableData>
                     </TableRow>
-                    <Break />
+                  
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='department'> department: </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             <SelectBox
+                          
                                 className='Selectbox1'
                                 name='department'
                                 onChange={handleChange}
                                 required
                             >
-                                <Option disabled selected value>
+                                 <Option disable select value>
                                     Select an Option
                                 </Option>
                                 <Option value='HR'> HR </Option>
@@ -178,25 +191,35 @@ export const CreateEmployee = () => {
                                 <Option value='ACCOUNTING'> ACCOUNTING </Option>
                                 <Option value='IT'> IT </Option>
                             </SelectBox>
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                 
                     <TableRow>
                         <TableData>
                             <Lable htmlFor='email'> email: </Lable>
                         </TableData>
                         <TableData>
+                            
                             <Input
+                             autoComplete='off'
                                 type='email'
                                 name='email'
                                 defaultValue='@techatcore.com'
                                 onChange={handleChange}
                                 required
                             />
-                            @techatcore.com
+                            
+                            {/* <Email 
+                                type='email'
+                                name='email'
+                                autoComplete='off' 
+                               domains={customDomains}
+                                onChange={handleChange} 
+                                />  */}
+                        
                         </TableData>
                     </TableRow>
-                    <Break />
+                    
                     <TableRow>
                         <TableData>
                             <Lable htmlFor='contactNo'> contactNo</Lable>
@@ -211,10 +234,10 @@ export const CreateEmployee = () => {
                             />
                         </TableData>
                     </TableRow>
-                    <Break />
+                  
                     <TableRow>
                         <TableData>
-                            <Lable htmlFor='joiningDate' >
+                            <Lable htmlFor='joiningDate' className='Selectbox1'>
                                 joiningDate:
                             </Lable>
                         </TableData>
@@ -228,19 +251,21 @@ export const CreateEmployee = () => {
                             />
                         </TableData>
                     </TableRow>
-                    <Break />
+                   
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Button type='Cancel'>
                                 <LinkTag to={'/list'}>Cancel</LinkTag>
                             </Button>
-                        </TableColumn>
-                        <TableColumn>
-                            <Button onClick={handleSubmit}>Submit</Button>
-                        </TableColumn>
+                        </TableData>
+                        <TableData>
+                            <Button onClick={handleSubmit}><LinkTag to={'/list'}>Submit</LinkTag></Button>
+                        </TableData>
                     </TableRow>
+                    </TableBody>
                 </Table>
             </Container>
         </Fragment>
-    )
-}
+            )
+        }
+        

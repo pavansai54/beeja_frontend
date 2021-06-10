@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import Styled from '@emotion/styled'
 import { Link, useParams } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
-import { faBackward, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faBackward } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
@@ -13,25 +13,16 @@ color:${props => props.color};
 font-size:25px;
 `
 const Lable = Styled.label`
-font-size:20px;
+font-size:19px;
 `
 const Input = Styled.input`
+font-size:15px;
 border:none;
 width:230px;
 margin-left:5px;
 height:20px;
 `
 const Break = Styled.br`
-`
-const SelectBox = Styled.select`
-&.Selectbox1{
-width: 230px;
-margin-left:5px;
-border-radius:5px;
-height:25px;
-}
-`
-const Option = Styled.option`
 `
 const Button = Styled.button`
 color:black;
@@ -55,12 +46,14 @@ align-items: center;
 padding:20px;
 `
 const Table = Styled.table`
-`
-const TableData = Styled.td`
+padding-top:15px;
 `
 const TableRow = Styled.tr`
 `
-const TableColumn = Styled.td`
+const TableData = Styled.td`
+padding:10px;
+`
+const TableBody = Styled.tbody`
 `
 const LinkTag = Styled(Link)`
 color:black;
@@ -93,7 +86,7 @@ export const EmployeeDetails = () => {
                 setError(error)
             }
         )
-    }, [])
+    }, [id])
 
     if (error) {
         return <div>Error: {error.message}</div>
@@ -113,82 +106,90 @@ export const EmployeeDetails = () => {
             <Break />
             <Container>
                 <Table>
+                    <TableBody>
 					<TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='code'> Code</Lable>
-                        </TableColumn>
-                        <TableColumn>
-                            :<Input value={empState.code} />
-                        </TableColumn>
+                        </TableData>
+                        <TableData>
+                            :<Input value={empState.code} readOnly/>
+                        </TableData>
                     </TableRow>
-					<Break/>
+			
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='firstName'> FirstName</Lable>
-                        </TableColumn>
-                        <TableColumn>
-                            :<Input value={empState.firstName} />
-                        </TableColumn>
+                        </TableData>
+                        <TableData>
+                            :<Input value={empState.firstName} readOnly/>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                  
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='lastName'> LastName</Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.lastName} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                 
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='designation'> Designation</Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.designation} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                  
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='department'>Department </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.department} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+                
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             {' '}
-                            <Lable htmlFor='email'>Email </Lable>
-                        </TableColumn>
-                        <TableColumn>
+                            <Lable htmlFor='email'>Email</Lable>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.email} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+            
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             {' '}
                             <Lable htmlFor='contactNo'> ContactNo</Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.contactNo} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+
                     <TableRow>
-                        <TableColumn>
+                        <TableData>
                             <Lable htmlFor='joiningDate'> JoiningDate</Lable>
-                        </TableColumn>
-                        <TableColumn>
+                        </TableData>
+                        <TableData>
                             :<Input value={empState.joiningDate} readOnly />
-                        </TableColumn>
+                        </TableData>
                     </TableRow>
-                    <Break />
+
+                    </TableBody>
                 </Table>
             </Container>
         </Fragment>
     )
 }
+
+
+
+
+
+

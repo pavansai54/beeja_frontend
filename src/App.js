@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Route, Router, Switch } from 'react-router-dom'
 import history from './history'
@@ -26,11 +27,7 @@ function App() {
 				<Route exact path='/display/:id/' component={EmployeeDetails} />
 				<Route exact path='/hr' component={HR} />
 				<Route exact path='/listpersonal' component={ListPersonalDetails} />
-				<Route
-					exact
-					path='/createpresonal'
-					component={Create_PersonalDetails}
-				/>
+				<Route exact path='/createpresonal'component={Create_PersonalDetails}/>
 				<Route exact path='/pd/:id/' component={Personal_Details} />
 				<Route exact path='/editpersonal/:id' component={EditPersonalDetails} />
 				<Route exact path='/inventorypage' component={InventoryPage} />
@@ -39,5 +36,13 @@ function App() {
 		</Router>
 	)
 }
+export default App;
 
-export default App
+
+
+
+
+
+
+
+
