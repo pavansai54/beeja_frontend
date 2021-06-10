@@ -3,7 +3,7 @@ import Styled from '@emotion/styled'
 import { Link, useHistory } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
 import 'react-toastify/dist/ReactToastify.css'
-import Email from 'react-email-autocomplete';
+
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
 position: sticky;
