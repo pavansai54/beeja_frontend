@@ -1,8 +1,7 @@
-import React from 'react'
+import { React, useState } from 'react'
 import Styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import logo from './images/mobile_black.png'
-
+import LoginService from './services/LoginService'
 const Header = Styled.header`
 margin:0;
 background-color:black;
@@ -52,7 +51,6 @@ text-align:center;
 font-size:20px;
 background-color:powderblue;
 width:17.5%;
-cursor: pointer;
 border-radius:5px;
 &:hover {
   opacity:0.5;
@@ -64,10 +62,7 @@ font-size:40px;
 font-weight:medium;
 padding-top:10px;
 `
-const LinkTag = Styled(Link)`
-color:black;
-text-decoration:none;
-`
+
 const Lable = Styled.label`
 `
 const Input = Styled.input`
@@ -75,37 +70,70 @@ padding:4px;
 `
 const Break = Styled.br`
 `
-const Logo = Styled.img`
-height: 40px;
-width: 40px;
-`
-
 export const LoginPage = () => {
-	return (
-		<>
-			<Header />
-			<LeftSplit>
-				<Tittle>tech.at.core</Tittle>
-			</LeftSplit>
-			<RightSplit>
-				<Heading>
-					<Logo src={logo} />
-					Beeja
-				</Heading>
-				<Lable htmlFor='username'>Username: </Lable>
-				<Input placeholder='Username' type='text' required />
-				<Break />
-				<Break />
-				<Lable htmlFor='password'>Password: </Lable>
-				<Input placeholder='Password' type='password' required />
-				<Break />
-				<Break />
-
-				<LinkTag to={'/home'}>
-					<Button type='submit'>Login</Button>
-				</LinkTag>
-			</RightSplit>
-			<Footer />
-		</>
-	)
+    const [formData, createFormData] = useState({
+        username: '',
+        password: '',
+    })
+    const handleChange = e => {
+        createFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
+        })
+    }
+    const handleSubmit = e => {
+        e.preventDefault()
+        console.log(formData)
+        const userName = formData.username
+        const Password = formData.password
+        const token = Buffer.from(`${userName}:${Password}`).toString('base64')
+        console.log(token)
+        LoginService.getLoginDetails(token).then(
+            result => {
+                console.log(result)
+                alert("Login Successful!")
+                window.location.replace('/list')
+            },
+            error => {
+                alert("Invalid credentials")
+                console.log("Enter the details")
+                console.log(error)
+            }
+        )
+    }
+    return (
+        <>
+            <Header />
+            <LeftSplit>
+                <Tittle>tech.at.core</Tittle>
+            </LeftSplit>
+            <RightSplit>
+                <Heading>Beeja</Heading>
+                <Lable htmlFor='username'>Username: </Lable>
+                <Input
+                    type='text'
+                    name='username'
+                    placeholder='Username'
+                    onChange={handleChange}
+                    required
+                />
+                <Break />
+                <Break />
+                <Lable htmlFor='password'>Password: </Lable>
+                <Input 
+                    placeholder='Password'
+                    name='password'
+                    type='password'
+                    onChange={handleChange}
+                    required
+                />
+                <Break />
+                <Break />
+                <Button type='submit' onClick={handleSubmit}>
+                    Login
+                </Button>
+            </RightSplit>
+            <Footer />
+        </>
+    )
 }

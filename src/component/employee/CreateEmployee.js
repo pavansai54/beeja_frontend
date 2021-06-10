@@ -2,9 +2,7 @@ import React, { Fragment, useState } from 'react'
 import Styled from '@emotion/styled'
 import { Link, useHistory } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
 position: sticky;
@@ -62,182 +60,187 @@ const TableRow = Styled.tr`
 `
 const TableColumn = Styled.td`
 `
-const LinkTag = Styled(Link)` 
-color:black; 
+const LinkTag = Styled(Link)`
+color:black;
 text-decoration:none;
 `
-
 export const CreateEmployee = () => {
-	const history = useHistory()
-	const [formData, createFormData] = useState({
-		name: '',
-		code: '',
-		email: ' ',
-		mobile: '',
-		department: '',
-		joinedDate: '',
-		role: '',
-	})
-
-	const handleChange = e => {
-		createFormData({
-			...formData,
-			[e.target.name]: e.target.value.trim(),
-		})
-	}
-
-	const handleSubmit = e => {
+    const history = useHistory()
+    const [formData, createFormData] = useState({
+        firstName:"",
+        lastName:"",
+        designation:"",
+        department:"",
+        email:"",
+        contactNo:"",
+        joiningDate:""
+    })
+    const handleChange = e => {
+        createFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
+        });
+    };
+    const handleSubmit = e => {
 		e.preventDefault()
 		EmployeeService.createEmployeeDetail(formData)
 			.then(function(response) {
+               
+                alert("Successfully Created!")
 				history.push('/list')
 			})
 			.catch(function(error) {
 				console.log(error)
 			})
 	}
-
-	return (
-		<Fragment>
-			<Navbar bgColor='grey' color='white'>
-				Create an Employee
-			</Navbar>
-			<Break />
-			<Container>
-				<Table>
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Name'> Name: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input type='text' name='name' onChange={handleChange} required />
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Empl-Id'> Employee Id: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input type='text' name='code' onChange={handleChange} required />
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Email'> Email: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								type='email'
-								name='email'
-								onChange={handleChange}
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							{' '}
-							<Lable htmlFor='Mobile Number'> Mobile Number: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								placeholder=' +91 '
-								name='mobile'
-								onChange={handleChange}
-								type='number'
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							{' '}
-							<Lable htmlFor='Department'> Department: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<SelectBox
-								className='Selectbox1'
-								name='department'
-								onChange={handleChange}
-								required
-							>
-								<Option disabled selected value>
-									{' '}
-									Select an Option
-								</Option>
-								<Option value='HR'> HR </Option>
-								<Option value='ADMIN'> ADMIN </Option>
-								<Option value='ACCOUNTING'> ACCOUNTING </Option>
-								<Option value='IT'> IT </Option>
-							</SelectBox>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Role'> Role: </Lable>
-						</TableColumn>
-						<TableColumn>
-							<SelectBox
-								className='Selectbox1'
-								name='role'
-								onChange={handleChange}
-								required
-							>
-								<Option disabled selected value>
-									{' '}
-									Select an Option
-								</Option>
-								<Option value='ADMIN'> ADMIN </Option>
-								<Option value='SUPER ADMIN'> SUPER ADMIN </Option>
-								<Option value='ACCOUNTANT'> ACCOUNTANT </Option>
-								<Option value='SOFTWARE ENGINEER'> SOFTWARE ENGINEER </Option>
-								<Option value='SENIOR-SOFTWARE ENGINEER'>
-									{' '}
-									SENIOR-SOFTWARE ENGINEER{' '}
-								</Option>
-							</SelectBox>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Lable htmlFor='Date-Containerat' className='Selectbox1'>
-								{' '}
-								Join Date:{' '}
-							</Lable>
-						</TableColumn>
-						<TableColumn>
-							<Input
-								type='date'
-								placeholder='dd-mm-yyyy'
-								name='joinedDate'
-								onChange={handleChange}
-								required
-							/>
-						</TableColumn>
-					</TableRow>
-					<Break />
-					<TableRow>
-						<TableColumn>
-							<Button type='Cancel'>
-								<LinkTag to={'/list'}>Cancel</LinkTag>
-							</Button>
-						</TableColumn>
-
-						<TableColumn>
-							<Button onClick={handleSubmit}>
-								Submit
-								{/* <LinkTag to={"/list"}>Submit</LinkTag> */}
-							</Button>
-						</TableColumn>
-					</TableRow>
-				</Table>
-			</Container>
-		</Fragment>
-	)
+    return (
+        <Fragment>
+            <Navbar bgColor='grey' color='white'>
+                Create an Employee
+            </Navbar>
+            <Break />
+            <Container>
+                <Table>
+            
+                    <TableRow>
+                        <TableColumn>
+                            <Lable htmlFor='firstName'> firstName: </Lable>
+                        </TableColumn>
+                        <TableColumn>
+                            <Input
+                                type='text'
+                                name='firstName'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableColumn>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableColumn>
+                            <Lable htmlFor='lastName'> lastName: </Lable>
+                        </TableColumn>
+                        <TableColumn>
+                            <Input
+                                type='text'
+                                name='lastName'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableColumn>
+                    </TableRow>
+                    <Break/>
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='designation'> designation: </Lable>
+                        </TableData>
+                        <TableData>
+                            <SelectBox
+                                className='Selectbox1'
+                                name='designation'
+                                onChange={handleChange}
+                                required
+                            >
+                                Select an Option
+                                <Option disabled selected value>
+                                    Select an Option
+                                </Option>
+                                <Option value='ASSOCIATE SOFTWARE ENGINEER'>
+                                    Associate Software Engineer
+                                </Option>
+                                <Option value='HR'> HR</Option>
+                                <Option value='QA'> QA</Option>
+                                <Option value='SOFTWARE ENGINEER'> Software Engineer </Option>
+                                <Option value='SR . SOFTWARE ENGINEER'>
+                                    Sr. Software Engineer
+                                </Option>
+                                <Option value='TECH LEAD'> Tech Lead</Option>
+                            </SelectBox>
+                        </TableData>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableColumn>
+                            <Lable htmlFor='department'> department: </Lable>
+                        </TableColumn>
+                        <TableColumn>
+                            <SelectBox
+                                className='Selectbox1'
+                                name='department'
+                                onChange={handleChange}
+                                required
+                            >
+                                <Option disabled selected value>
+                                    Select an Option
+                                </Option>
+                                <Option value='HR'> HR </Option>
+                                <Option value='ADMIN'> ADMIN </Option>
+                                <Option value='ACCOUNTING'> ACCOUNTING </Option>
+                                <Option value='IT'> IT </Option>
+                            </SelectBox>
+                        </TableColumn>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='email'> email: </Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                                type='email'
+                                name='email'
+                                defaultValue='@techatcore.com'
+                                onChange={handleChange}
+                                required
+                            />
+                            @techatcore.com
+                        </TableData>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='contactNo'> contactNo</Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                                placeholder=' +91 '
+                                name='contactNo'
+                                onChange={handleChange}
+                                type='number'
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableData>
+                            <Lable htmlFor='joiningDate' >
+                                joiningDate:
+                            </Lable>
+                        </TableData>
+                        <TableData>
+                            <Input
+                                type='date'
+                                placeholder='dd-mm-yyyy'
+                                name='joiningDate'
+                                onChange={handleChange}
+                                required
+                            />
+                        </TableData>
+                    </TableRow>
+                    <Break />
+                    <TableRow>
+                        <TableColumn>
+                            <Button type='Cancel'>
+                                <LinkTag to={'/list'}>Cancel</LinkTag>
+                            </Button>
+                        </TableColumn>
+                        <TableColumn>
+                            <Button onClick={handleSubmit}>Submit</Button>
+                        </TableColumn>
+                    </TableRow>
+                </Table>
+            </Container>
+        </Fragment>
+    )
 }

@@ -1,17 +1,14 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import Styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-	faEdit,
-	faTrash,
-	faSearch,
-	faPlus,
-	faHome,
-	faList,
+    faEdit,
+    faTrash,
+    faPlus,
+    faHome,
 } from '@fortawesome/free-solid-svg-icons'
 import EmployeeService from '../services/EmployeeService'
-
 const Navbar = Styled.nav`
 background-color: ${props => props.bgColor};
 position: sticky;
@@ -79,7 +76,6 @@ background-color:rgba(255,255,255,0.7);
 border:1px solid gray;
 `
 const IdButton = Styled.button`
-
 `
 const LinkTag = Styled(Link)`
 color:black;
@@ -96,101 +92,107 @@ margin-left:47%;
 height:24px;
 font-size:15px;
 `
-
 export const ListOfEmployee = () => {
-	const [error, setError] = useState(null)
-	const [isLoaded, setIsLoaded] = useState(false)
-	const [data, setdata] = useState([])
+    const [error, setError] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [data, setdata] = useState([])
 
-	const deletedEmployee = useCallback(id => {
-		EmployeeService.deleteEmployeeDetail(id)
-			.then(function(response) {
-				setIsLoaded(false)
-			})
-			.catch(function(error) {
-				console.log(error)
-			})
-	}, [])
 
-	useEffect(() => {
-		if (!isLoaded && data != []) {
-			EmployeeService.getAllEmployeeDetail().then(
-				result => {
-					setIsLoaded(true)
-					setdata(result.data)
-				},
-				error => {
-					setIsLoaded(true)
-				}
-			)
-		}
-	}, [isLoaded])
+    const deleteEmployee = useCallback(id => {
+        EmployeeService.deleteEmployeeDetail(id)
+		.then(function(response) {
+			setIsLoaded(false)
+		})
+		.catch(function(error) {
+			console.log(error)
+		})
+    }, [])
 
-	if (error) {
-		return <div>Error: {error.message}</div>
-	} else if (!isLoaded) {
-		return <div>Loading...</div>
-	} else {
-		return (
-			<Fragment>
-				<Navbar bgColor='grey' color='white'>
-					List of Employee
-					<Input type='text' placeholder='Search'></Input>
-					<Button>
-						<LinkTag to={'/home'}>
-							<FontAwesomeIcon icon={faHome}></FontAwesomeIcon> home
-						</LinkTag>
-					</Button>
-					<Button>
-						<LinkTag to={'/adding'}>
-							<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Add
-						</LinkTag>
-					</Button>
-				</Navbar>
-				<Break />
-				<Container>
-					<Table>
-						<TableRow>
-							<TableHeading>ID</TableHeading>
-							<TableHeading>Name</TableHeading>
-							<TableHeading>Email</TableHeading>
-							<TableHeading>Role</TableHeading>
-							<TableHeading>Department</TableHeading>
-							<TableHeading>JoiningDate</TableHeading>
-							<TableHeading>MobileNumber</TableHeading>
-							<TableHeading>Edit</TableHeading>
-							<TableHeading>Delete</TableHeading>
-						</TableRow>
+    useEffect(() => {
+        if (!isLoaded && data !== []) {
+            EmployeeService.getAllEmployeeDetail().then(
+                result => {
+                    setIsLoaded(true)
+					
+                    setdata(result.data)
+                },
+                error => {
+                    setIsLoaded(true)
+                }
+            )
+        }
+    }, [isLoaded])
 
-						{data.map(employee => (
-							<TableRow>
-								<LinkTag to={`/display/${employee._id}`}>
-									<TableData key={employee._id}>{employee.code}</TableData>
-								</LinkTag>
-								<TableData>{employee.name}</TableData>
-								<TableData>{employee.email}</TableData>
-								<TableData>{employee.role}</TableData>
+    if (error) {
+        return <div>Error: {error.message}</div>
+    } else if (!isLoaded) {
+        return <div>Loading...</div>
+    } else {
+        return (
+            <Fragment>
+                <Navbar bgColor='grey' color='white'>
+                    List of Employee
+                    <Input type='text' placeholder='Search'></Input>
+                    <Button>
+                        <LinkTag to={'/home'}>
+                            <FontAwesomeIcon icon={faHome}></FontAwesomeIcon> home
+                        </LinkTag>
+                    </Button>
+                    <Button>
+                        <LinkTag to={'/adding'}>
+                            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Add
+                        </LinkTag>
+                    </Button>
+                </Navbar>
+                <Break />
+                <Container>
+                    <Table>
+                        <TableRow>
+                            
+							<TableHeading>Code</TableHeading>
+                            <TableHeading>FirstName</TableHeading>
+                            <TableHeading>LastName</TableHeading>
+                            <TableHeading>Designation</TableHeading>
+                            <TableHeading>Department</TableHeading>
+                            <TableHeading>Email</TableHeading>
+                            <TableHeading>ContactNo</TableHeading>
+                            <TableHeading>joiningDate</TableHeading>
+							
+                            <TableHeading>Edit</TableHeading>
+                            <TableHeading>Delete</TableHeading>
+                        </TableRow>
+                        {data.map(employee => (
+                            <TableRow>
+                              
+                                    
+                                
+								<TableData><LinkTag to={`/display/${employee._id}`}>{employee.code}</LinkTag></TableData>
+                                <TableData>{employee.firstName}</TableData>
+                                <TableData>{employee.lastName}</TableData>
+                               
+                                <TableData>{employee.designation}</TableData>
 								<TableData>{employee.department}</TableData>
-								<TableData>{employee.joinedDate}</TableData>
-								<TableData>{employee.mobile}</TableData>
-								<TableData style={{ 'text-align': 'center' }}>
-									<LinkTag to={`/edit/${employee._id}`}>
-										<FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-									</LinkTag>
-								</TableData>
-								<TableData style={{ 'text-align': 'center' }}>
-									<LinkTag>
-										<FontAwesomeIcon
-											icon={faTrash}
-											onClick={() => deletedEmployee(employee._id)}
-										></FontAwesomeIcon>
-									</LinkTag>
-								</TableData>
-							</TableRow>
-						))}
-					</Table>
-				</Container>
-			</Fragment>
-		)
-	}
-}
+                                <TableData>{employee.email}</TableData>
+                                <TableData>{employee.contactNo}</TableData>
+                                <TableData>{employee.joiningDate}</TableData>
+								
+                                <TableData style={{ 'text-align': 'center' }}>
+                                    <LinkTag to={`/edit/${employee._id}`}>
+                                        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                                    </LinkTag>
+                                </TableData>
+                                <TableData style={{ 'text-align': 'center' }}>
+                                    <LinkTag>
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            onClick={() => deleteEmployee(employee._id)}
+                                        ></FontAwesomeIcon>
+                                    </LinkTag>
+                                </TableData>
+                            </TableRow>
+                        ))}
+                    </Table>
+                </Container>
+            </Fragment>
+        )
+}}

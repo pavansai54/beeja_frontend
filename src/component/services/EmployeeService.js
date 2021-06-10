@@ -1,27 +1,20 @@
 import axios from 'axios'
-
-const apiBaseUri =
-	'https://us-central1-t-beeja.cloudfunctions.net/function-beejaDB'
-
+const apiBaseUri = 'https://us-central1-t-beeja.cloudfunctions.net/function-app'
 class EmployeeService {
-	getAllEmployeeDetail() {
-		return axios.get(apiBaseUri + '/employees')
-	}
-
-	getOneEmployeeDetail(employeeId) {
-		return axios.get(apiBaseUri + '/employee' + '/' + employeeId)
-	}
-
-	createEmployeeDetail(employee) {
-		return axios.post(apiBaseUri + '/employee', employee)
-	}
-
-	updateEmployeeDetail(employee, employeeId) {
-		return axios.put(apiBaseUri + '/employee' + '/' + employeeId, employee)
-	}
-
-	deleteEmployeeDetail(employeeId) {
-		return axios.delete(apiBaseUri + '/employee' + '/' + employeeId)
-	}
+    getAllEmployeeDetail() {
+        return axios.get(apiBaseUri + '/allemp')
+    }
+    getOneEmployeeDetail(empId) {
+        return axios.get(apiBaseUri + '/emp/' + empId)
+    }
+    createEmployeeDetail(emp) {
+        return axios.post(apiBaseUri + '/emp', emp)
+    }
+    updateEmployeeDetail(empId, employee) {
+        return axios.put(apiBaseUri + '/emp' + '/'  + empId, employee)
+    }
+    deleteEmployeeDetail(emppId) {
+        return axios.delete(apiBaseUri + '/emp' + '/' + emppId)
+    }
 }
 export default new EmployeeService()
