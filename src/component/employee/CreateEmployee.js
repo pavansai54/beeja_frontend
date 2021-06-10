@@ -86,15 +86,14 @@ export const CreateEmployee = () => {
         createFormData({
             ...formData,
             [e.target.name]: e.target.value.trim(),
-        })
-    }
+        });
+    };
     const handleSubmit = e => {
 		e.preventDefault()
 		EmployeeService.createEmployeeDetail(formData)
 			.then(function(response) {
-                console.log(response)
+               
                 alert("Successfully Created!")
-                setIsLoaded(false)
 				history.push('/list')
                
 			})

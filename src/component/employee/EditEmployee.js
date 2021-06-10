@@ -80,10 +80,9 @@ export const EditEmployee = () => {
         setState({
             ...empState,
             [e.target.name]: e.target.value.trim(),
-        })
+        });
     }
     const User = {
-      
         firstName: `${empState.firstName}`,
         lastName: `${empState.lastName}`,
         designation: `${empState.designation}`,
@@ -93,21 +92,20 @@ export const EditEmployee = () => {
         joiningDate: `${empState.joiningDate}`,
     }
     const HandleSubmit = async e => {
-		e.preventDefault()
-		EmployeeService.updateEmployeeDetail(User, id)
-			.then(result => {
-                console.log(result)
-				history.push('/list')
-			})
-			.catch(function(error) {
-				console.log(error)
-			})
-	}
-
+        e.preventDefault()
+        EmployeeService.updateEmployeeDetail(id,User)
+            .then(result1 => {
+                
+                alert("Successfully Updated!!")
+                history.push('/list')
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
     useEffect(() => {
         EmployeeService.getOneEmployeeDetail(id).then(
             result => {
-				
                 setIsLoaded(true)
                 setState(result.data)
             },
@@ -117,7 +115,6 @@ export const EditEmployee = () => {
             }
         )
     }, [])
-
     if (error) {
         return <div>Error: {error.message}</div>
     } else if (!isLoaded) {

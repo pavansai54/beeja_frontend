@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiBaseUri =
-	'https://us-central1-t-beeja.cloudfunctions.net/function-beejaDB'
+	'https://us-central1-t-beeja.cloudfunctions.net/function-app'
 
 class AccountingService {
 	getAllAccountDetail() {

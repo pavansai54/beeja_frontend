@@ -11,12 +11,10 @@ class EmployeeService {
         return axios.post(apiBaseUri + '/emp', emp)
     }
     updateEmployeeDetail(empId, employee) {
-        return axios.put(apiBaseUri + '/emp/'   + empId, employee)
+        return axios.put(apiBaseUri + '/emp' + '/'  + empId, employee)
     }
     deleteEmployeeDetail(emppId) {
-        return axios.delete(apiBaseUri + '/emp/' + emppId)
+        return axios.delete(apiBaseUri + '/emp' + '/' + emppId)
     }
 }
 export default new EmployeeService()
-
-
