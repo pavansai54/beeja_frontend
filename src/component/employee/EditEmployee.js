@@ -236,7 +236,6 @@ export const EditEmployee = () => {
                
                     <TableRow>
                         <TableData>
-                          
                             <Lable htmlFor='contactNo'> Contact Number </Lable>
                         </TableData>
                         <TableData>
