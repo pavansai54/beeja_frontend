@@ -227,7 +227,7 @@ export const EditEmployee = () => {
                                 type='email'
                                 name='email'
                                 value={empState.email}
-                                onChange={handleChange}
+                                onChange={handleChange} readOnly
                                 required
                             />
                            
