@@ -227,7 +227,7 @@ export const EditEmployee = () => {
                                 type='email'
                                 name='email'
                                 value={empState.email}
-                                onChange={handleChange}
+                                onChange={handleChange} readOnly
                                 required
                             />
                            
@@ -236,7 +236,6 @@ export const EditEmployee = () => {
                
                     <TableRow>
                         <TableData>
-                          
                             <Lable htmlFor='contactNo'> Contact Number </Lable>
                         </TableData>
                         <TableData>

@@ -69,18 +69,15 @@ text-decoration:none;
 `
 export const CreateEmployee = () => {
 
-    const customDomains = ['techatcore.com']
-
     const history = useHistory()
-    const [isLoaded, setIsLoaded] = useState(false)
     const [formData, createFormData] = useState({
-        firstName: '',
-        lastName: '',
-        designation: ' ',
-        department: '',
-        email:'' ,
-        contactNo: '',
-        joiningDate: '',
+        firstName:"",
+        lastName:"",
+        designation:"",
+        department:"",
+        email:"",
+        contactNo:"",
+        joiningDate:""
     })
     const handleChange = e => {
         createFormData({
@@ -95,14 +92,12 @@ export const CreateEmployee = () => {
                
                 alert("Successfully Created!")
 				history.push('/list')
-               
 			})
 			.catch(function(error) {
 				console.log(error)
 			})
 	}
-   
-    console.log(formData.email + customDomains)
+    
     return (
         <Fragment>
             <Navbar bgColor='grey' color='white'>
@@ -122,7 +117,7 @@ export const CreateEmployee = () => {
                                 type='text'
                                 name='firstName'
                                 onChange={handleChange}
-                                required
+                                requiredzz
                             />
                         </TableData>
                     </TableRow>
@@ -208,14 +203,6 @@ export const CreateEmployee = () => {
                                  onChange={handleChange}
                                 required
                             />
-                            
-                            {/* <Email 
-                                type='email'
-                                name='email'
-                                autoComplete='off' 
-                               domains={customDomains}
-                                onChange={handleChange} 
-                                />  */}
                         
                         </TableData>
                     </TableRow>
@@ -259,7 +246,7 @@ export const CreateEmployee = () => {
                             </Button>
                         </TableData>
                         <TableData>
-                            <Button onClick={handleSubmit}><LinkTag to={'/list'}>Submit</LinkTag></Button>
+                            <Button onClick={handleSubmit}>Submit</Button>
                         </TableData>
                     </TableRow>
                     </TableBody>
