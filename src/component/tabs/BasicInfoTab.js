@@ -136,7 +136,7 @@ export const BasicInfoTab= () => {
                             </Button>
                         </TableData>
                         <TableData>
-                            <Button >Submit </Button>
+                            <Button >Submit</Button>
                         </TableData>
                     </TableRow>
                     </TableBody>
