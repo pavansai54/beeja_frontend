@@ -71,6 +71,7 @@ export const CreateEmployee = () => {
 
     const history = useHistory()
     const [formData, createFormData] = useState({
+        code:"",
         firstName:"",
         lastName:"",
         designation:"",
@@ -91,7 +92,7 @@ export const CreateEmployee = () => {
 			.then(function(response) {
                
                 alert("Successfully Created!")
-				history.push('/list')
+				//  history.push('/list')
 			})
 			.catch(function(error) {
 				console.log(error)
@@ -246,7 +247,11 @@ export const CreateEmployee = () => {
                             </Button>
                         </TableData>
                         <TableData>
-                            <Button onClick={handleSubmit}>Submit</Button>
+                            
+                            <Button onClick={handleSubmit} >
+                            <LinkTag to={`/tabshome/${formData.code}`}>Submit</LinkTag>
+                            </Button>
+                           
                         </TableData>
                     </TableRow>
                     </TableBody>

@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import Styled from '@emotion/styled'
-import { Link, useParams } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faEdit,
@@ -9,7 +9,8 @@ import {
     faHome,
 } from '@fortawesome/free-solid-svg-icons'
 import EmployeeService from '../services/EmployeeService'
-const Navbar = Styled.nav`
+
+const Navbar = Styled.nav`git 
 background-color: ${props => props.bgColor};
 position: sticky;
 top: 0px;
@@ -114,19 +115,21 @@ export const ListOfEmployee = () => {
                     List of Employee
                     <Input type='text' placeholder='Search'></Input>
                     <Button>
-                        <Link to={'/home'} style={{ 'color': 'black'}}>
+                        <Link to={'/home'} style={{ 'color': 'black','text-decoration':'none' }}>
                             <FontAwesomeIcon icon={faHome}></FontAwesomeIcon> home
                         </Link>
                     </Button>
                     <Button>
-                        <Link to={'/adding'} style={{ 'color': 'black'}}>
+                        <Link to={'/adding'} style={{ 'color': 'black','text-decoration':'none'}}>
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Add
                         </Link>
                     </Button>
                 </Navbar>
-                <Break />
+               
+             
                 <Container>
                     <Table>
+                  
                         <TableBody>
                         <TableRow>
 							<TableHeading>Code</TableHeading>
@@ -143,7 +146,7 @@ export const ListOfEmployee = () => {
                         {data.map(employee => (
                             <TableRow key={employee._id}>  
 								<TableData >
-                                <Link to={`/display/${employee._id}`}  style={{ 'color': 'black'}} >
+                                <Link to={`/display/${employee._id}`}  style={{ 'color': 'black','text-decoration':'none'}} >
                                     {employee.code}
                                 </Link>
                                 </TableData>
@@ -155,7 +158,7 @@ export const ListOfEmployee = () => {
                                 <TableData>{employee.contactNo}</TableData>
                                 <TableData>{employee.joiningDate}</TableData>
                                 <TableData style={{ 'textAlign': 'center','color':'black' }}>
-                                    <Link to={`/edit/${employee._id}`}>
+                                <Link to={`/edit/${employee._id}`}>
                                         <FontAwesomeIcon style={{ 'color': 'black'}} icon={faEdit}></FontAwesomeIcon>
                                     </Link >
                                 </TableData>
@@ -170,8 +173,11 @@ export const ListOfEmployee = () => {
                             </TableRow>
                         ))}
                         </TableBody>
+                      
+                       
                     </Table>
                 </Container>
+                
             </Fragment>
         )
 }}

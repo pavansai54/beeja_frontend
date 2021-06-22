@@ -15,6 +15,8 @@ import { Personal_Details } from './component/personalDetails /PersonalDetails'
 import { EditPersonalDetails } from './component/personalDetails /EditPersonalDetails'
 import { InventoryPage } from './component/accounting /Accounting'
 import { Create } from './component/accounting /CreateSystemDetail'
+import {FullWidthTabs} from './component/tabs/HomeOfTabs'
+import {BasicInfo_Tab} from './component/tabs/BasicInfoTab'
 function App() {
 	return (
 		<Router history={history}>
@@ -32,6 +34,8 @@ function App() {
 				<Route exact path='/editpersonal/:id' component={EditPersonalDetails} />
 				<Route exact path='/inventorypage' component={InventoryPage} />
 				<Route exact path='/create' component={Create} />
+				<Route exact path='/tabshome' component={FullWidthTabs} />
+				{/* <Route exact path='/basic/:id' component={BasicInfo_Tab} /> */}
 			</Switch>
 		</Router>
 	)
