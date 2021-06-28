@@ -7,6 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import {BasicInfoTab} from '../tabs/BasicInfoTab'
+import { PersonalTab } from "../tabs/PersonalDeTab";
 import {EditEmployee} from '../employee/EditEmployee'
 import { Link} from 'react-router-dom'
 
@@ -66,7 +67,8 @@ export const FullWidthTabs=()=> {
       <BasicInfoTab></BasicInfoTab>
         </TabPanel>
         <TabPanel value={value} index={1} >
-  <h1>"Personal details"</h1>
+  <PersonalTab>
+  </PersonalTab>
         </TabPanel>
         <TabPanel value={value} index={2} >
     <h1>"Documents" </h1>
